@@ -5,7 +5,7 @@ import time
 import numbers
 import pytz
 
-from sqlalchemy import distinct, or_, and_, UniqueConstraint
+from sqlalchemy import distinct, or_, and_, UniqueConstraint, cast
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.event import listens_for
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -638,6 +638,7 @@ class Query(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model):
             )
             .filter(Query.schedule.isnot(None))
             .order_by(Query.id)
+            .all()
         )
 
         now = utils.utcnow()
@@ -1098,6 +1099,10 @@ class Dashboard(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model
 
     def __str__(self):
         return "%s=%s" % (self.id, self.name)
+
+    @property
+    def name_as_slug(self):
+        return utils.slugify(self.name)
 
     @classmethod
     def all(cls, org, group_ids, user_id):
