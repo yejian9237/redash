@@ -79,11 +79,15 @@ function TextboxDialog({ dialog, isNew, ...props }) {
           placeholder="请输入文本"
         />
         <small>
-          支持基本的{" "}
+          支持基本的{" "}{" "}
           <a target="_blank" rel="noopener noreferrer" href="https://www.markdownguide.org/cheat-sheet/#basic-syntax">
-            <Tooltip title="在新窗口打开Markdown标记指南">Markdown标记</Tooltip>
+            <Tooltip title="在新窗口打开Markdown标记指南">Markdown标记(英文)</Tooltip>
           </a>
-          .
+          ；
+          <a target="_blank" rel="noopener noreferrer" href="https://www.runoob.com/markdown/md-tutorial.html">
+            <Tooltip title="在新窗口打开Markdown菜鸟教程">Markdown菜鸟教程(中文)</Tooltip>
+          </a>
+          。
         </small>
         {text && (
           <React.Fragment>

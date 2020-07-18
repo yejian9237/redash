@@ -94,6 +94,7 @@ class Widget extends React.Component {
     Modal.confirm({
       title: "删除部件",
       content: "确定要从报表中移除该部件吗？",
+      cancelText: "取消",
       okText: "删除",
       okType: "danger",
       onOk: () => widget.delete().then(onDelete),
