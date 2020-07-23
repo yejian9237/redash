@@ -21,7 +21,7 @@ export default function Editor() {
           <strong>stage5</strong> - 层级5的值(可空)
         </li>
         <li>
-          <strong>value</strong> - 序列数
+          <strong>value</strong> - 数值
         </li>
       </ul>
     </React.Fragment>
