@@ -237,7 +237,7 @@ export class ParameterMappingInput extends React.Component {
     const { mapping } = this.props;
     switch (mapping.type) {
       case MappingType.DashboardAddNew:
-        return ["Key", "请输入参数代码", this.renderDashboardAddNew()];
+        return ["Key", "请输入参数名称", this.renderDashboardAddNew()];
       case MappingType.DashboardMapToExisting:
         return ["Key", "请选择参数", this.renderDashboardMapToExisting()];
       case MappingType.StaticValue:

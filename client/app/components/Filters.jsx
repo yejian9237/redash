@@ -119,7 +119,7 @@ function Filters({ filters, onChange }) {
                         <i className="fa fa-check-square-o m-r-5" />
                         全选
                       </Select.Option>,
-                      <Select.OptGroup key="Values" title="Values">
+                      <Select.OptGroup key="Values" label="值：">
                         {options}
                       </Select.OptGroup>,
                     ]}

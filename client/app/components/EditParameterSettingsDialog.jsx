@@ -33,7 +33,7 @@ function NameInput({ name, type, onChange, existingNames, setValidation }) {
   let validateStatus = "";
 
   if (!name) {
-    helpText = "参数代码";
+    helpText = "参数名称";
     setValidation(false);
   } else if (includes(existingNames, name)) {
     helpText = "同名参数已存在！";
@@ -52,7 +52,7 @@ function NameInput({ name, type, onChange, existingNames, setValidation }) {
   }
 
   return (
-    <Form.Item required label="代码" help={helpText} validateStatus={validateStatus} {...formItemProps}>
+    <Form.Item required label="名称" help={helpText} validateStatus={validateStatus} {...formItemProps}>
       <Input onChange={e => onChange(e.target.value)} autoFocus />
     </Form.Item>
   );
@@ -142,7 +142,7 @@ function EditParameterSettingsDialog(props) {
             type={param.type}
           />
         )}
-        <Form.Item label="名称" {...formItemProps}>
+        <Form.Item label="标题" {...formItemProps}>
           <Input
             value={isNull(param.title) ? getDefaultTitle(param.name) : param.title}
             onChange={e => setParam({ ...param, title: e.target.value })}
@@ -180,7 +180,7 @@ function EditParameterSettingsDialog(props) {
           </Select>
         </Form.Item>
         {param.type === "enum" && (
-          <Form.Item label="Values" help="待选值(每行一个)" {...formItemProps}>
+          <Form.Item label="待选值" help="待选值(每行一个)" {...formItemProps}>
             <Input.TextArea
               rows={3}
               value={param.enumOptions}
