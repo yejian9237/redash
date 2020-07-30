@@ -53,7 +53,7 @@ class QueriesList extends React.Component {
     {
       key: "archive",
       href: "queries/archive",
-      title: "Archived",
+      title: "归档的查询",
       icon: () => <Sidebar.MenuIcon icon="fa fa-archive" />,
     },
   ];
