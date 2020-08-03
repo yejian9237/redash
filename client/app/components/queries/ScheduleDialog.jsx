@@ -199,7 +199,7 @@ class ScheduleDialog extends React.Component {
     } = this.state;
 
     return (
-      <Modal {...dialog.props} title="Refresh Schedule" className="schedule" onOk={() => this.save()}>
+      <Modal {...dialog.props} title="自动刷新" okText="确定" cancelText="取消" className="schedule" onOk={() => this.save()}>
         <div className="schedule-component">
           <h5>刷新频率</h5>
           <div data-testid="interval">
