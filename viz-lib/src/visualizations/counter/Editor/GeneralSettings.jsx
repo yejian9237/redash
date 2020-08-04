@@ -51,7 +51,7 @@ export default function GeneralSettings({ options, data, visualizationName, onOp
           data-test="Counter.General.TargetValueColumn"
           defaultValue={options.targetColName}
           onChange={targetColName => onOptionsChange({ targetColName })}>
-          <Select.Option value="">No target value</Select.Option>
+          <Select.Option value="">无目标值</Select.Option>
           {map(data.columns, col => (
             <Select.Option key={col.name} data-test={"Counter.General.TargetValueColumn." + col.name}>
               {col.name}

@@ -130,7 +130,7 @@ function SelectItemsDialog({
         <div className="flex-fill scrollbox">
           {isLoading && <LoadingState className="" />}
           {!isLoading && !hasResults && (
-            <BigMessage icon="fa-search" message="No items match your search." className="" />
+            <BigMessage icon="fa-search" message="没有匹配的搜索结果。" className="" />
           )}
           {!isLoading && hasResults && (
             <ItemsList
