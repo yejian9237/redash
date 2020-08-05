@@ -71,6 +71,7 @@
     "react-ace": "^9.1.1",
     "react-dom": "^16.8.3",
     "react-grid-layout": "^0.18.2",
+    "react-markdown-it": "^1.0.2",
     "react-resizable": "^1.10.1",
     "react-virtualized": "^9.21.2",
     "universal-router": "^8.3.0",
