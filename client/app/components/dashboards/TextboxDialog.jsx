@@ -36,7 +36,7 @@ function TextboxDialog({ dialog, isNew, ...props }) {
 
   const saveWidget = useCallback(() => {
     dialog.close(text).catch(() => {
-      notification.error(isNew ? "Widget could not be added" : "Widget could not be saved");
+      notification.error(isNew ? "部件将不会新增。" : "部件将不会保存。");
     });
   }, [dialog, isNew, text]);
 
