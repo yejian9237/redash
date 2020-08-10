@@ -504,6 +504,12 @@ REQUESTS_ALLOW_REDIRECTS = parse_boolean(
     os.environ.get("REDASH_REQUESTS_ALLOW_REDIRECTS", "false")
 )
 
+# Enforces CSRF token validation on API requests.
+# This is turned off by default to avoid breaking any existing deployments but it is highly recommended to turn this toggle on to prevent CSRF attacks.
+ENFORCE_CSRF = parse_boolean(
+    os.environ.get("REDASH_ENFORCE_CSRF", "false")
+)
+
 # dazdata
 DAZ_COMMON = os.environ.get("REDASH_DAZ_COMMON", "")
 
@@ -512,3 +518,4 @@ DAZ_DATA = os.environ.get("REDASH_DAZ_DATA", "")
 
 DAZ_EXCEL = os.environ.get("REDASH_DAZ_EXCEL", "")
 DAZ_CHINAGEO = os.environ.get("REDASH_DAZ_CHINAGEO", "")
+DAZ_FUNCTION = os.environ.get("REDASH_DAZ_FUNCTION", "")

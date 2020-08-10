@@ -9,6 +9,7 @@
       </div>
     {% else %}
       <form role="form" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="form-group">
           <label for="email">请输入用户电子邮箱：</label>
           <input type="email" class="form-control" name="email" value="{{email}}">
