@@ -514,8 +514,6 @@ ENFORCE_CSRF = parse_boolean(
 DAZ_COMMON = os.environ.get("REDASH_DAZ_COMMON", "")
 
 DAZ_CONTRACT = os.environ.get("REDASH_DAZ_CONTRACT", "")
-DAZ_DATA = os.environ.get("REDASH_DAZ_DATA", "")
 
 DAZ_EXCEL = os.environ.get("REDASH_DAZ_EXCEL", "")
-DAZ_CHINAGEO = os.environ.get("REDASH_DAZ_CHINAGEO", "")
-DAZ_FUNCTION = os.environ.get("REDASH_DAZ_FUNCTION", "")
+DAZ_USER = os.environ.get("REDASH_DAZ_USER", "")
