@@ -83,7 +83,6 @@ from redash.handlers.users import (
     UserRegenerateApiKeyResource,
     UserResetPasswordResource,
     UserResource,
-    UserActiveResource,
 )
 from redash.handlers.visualizations import (
     VisualizationListResource,
@@ -300,9 +299,6 @@ api.add_org_resource(
 )
 api.add_org_resource(
     UserDisableResource, "/api/users/<user_id>/disable", endpoint="user_disable"
-)
-api.add_org_resource(
-    UserActiveResource, "/api/users/<user_id>/active", endpoint="user_active"
 )
 
 api.add_org_resource(
