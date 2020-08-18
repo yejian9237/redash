@@ -145,10 +145,10 @@ export default function GeneralSettings({ options, data, onOptionsChange }) {
               defaultValue={options.sizemode}
               onChange={mode => onOptionsChange({ sizemode: mode })}>
               <Select.Option value="area" data-test="Chart.SizeMode.Area">
-                Area
+                面积
               </Select.Option>
               <Select.Option value="diameter" data-test="Chart.SizeMode.Diameter">
-                Diameter
+                直径
               </Select.Option>
             </Select>
           </Section>
