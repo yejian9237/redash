@@ -220,7 +220,7 @@ function EditParameterSettingsDialog(props) {
         )}
         {(param.type === "enum" || param.type === "query") && param.multiValuesOptions && (
           <Form.Item
-            label="Quotation"
+            label="值格式"
             help={
               <React.Fragment>
                 在查询脚本中显示为: <code>{joinExampleList(param.multiValuesOptions)}</code>
