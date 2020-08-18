@@ -464,7 +464,7 @@ class QueryUploadResource(BaseResource):
         if not os.path.exists(basepath):
             os.mkdir(basepath)
 
-        filename = str(datasource_id) + "_" + file.filename
+        filename = str(self.current_user.id) + "_" + file.filename
         fullname = os.path.join(basepath, filename)
         if os.path.isfile(fullname):
             os.remove(fullname)
