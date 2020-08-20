@@ -57,4 +57,8 @@ export default class DefaultPolicy {
     const result = clientConfig.queryRefreshIntervals;
     return isArray(result) ? result : null;
   }
+
+  isAdmin() {
+    return currentUser.isAdmin;
+  }
 }

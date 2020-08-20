@@ -517,3 +517,4 @@ DAZ_CONTRACT = os.environ.get("REDASH_DAZ_CONTRACT", "")
 
 DAZ_EXCEL = os.environ.get("REDASH_DAZ_EXCEL", "")
 DAZ_USER = os.environ.get("REDASH_DAZ_USER", "")
+DAZ_ENUM = os.environ.get("REDASH_DAZ_ENUM", "")
