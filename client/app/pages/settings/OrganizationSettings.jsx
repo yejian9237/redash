@@ -12,6 +12,7 @@ import recordEvent from "@/services/recordEvent";
 import OrgSettings from "@/services/organizationSettings";
 import routes from "@/services/routes";
 import useImmutableCallback from "@/lib/hooks/useImmutableCallback";
+import { getHorizontalFormProps, getHorizontalFormItemWithoutLabelProps } from "@/styles/formStyle";
 
 import GeneralSettings from "./components/GeneralSettings";
 import AuthSettings from "./components/AuthSettings";
@@ -73,16 +74,18 @@ function OrganizationSettings({ onError }) {
 
   return (
     <div className="row" data-test="OrganizationSettings">
-      <div className="col-md-offset-4 col-md-4">
+      <div className="m-r-20 m-l-20">
         {isLoading ? (
           <LoadingState className="" />
         ) : (
-          <Form layout="vertical" onSubmit={handleSubmit}>
+          <Form {...getHorizontalFormProps()} onSubmit={handleSubmit}>
             <GeneralSettings settings={settings} values={currentValues} onChange={handleChange} />
             <AuthSettings settings={settings} values={currentValues} onChange={handleChange} />
-            <Button className="w-100" type="primary" htmlType="submit" loading={isSaving}>
-              保存
-            </Button>
+            <Form.Item {...getHorizontalFormItemWithoutLabelProps()}>
+              <Button type="primary" htmlType="submit" loading={isSaving}>
+                保存
+              </Button>
+            </Form.Item>
           </Form>
         )}
       </div>
@@ -103,7 +106,7 @@ const OrganizationSettingsPage = wrapSettingsTab(
   {
     permission: "admin",
     title: "系统设置",
-    path: "settings/organization",
+    path: "settings/general",
     order: 6,
   },
   OrganizationSettings
@@ -112,7 +115,7 @@ const OrganizationSettingsPage = wrapSettingsTab(
 routes.register(
   "Settings.Organization",
   routeWithUserSession({
-    path: "/settings/organization",
+    path: "/settings/general",
     title: "系统设置",
     render: pageProps => <OrganizationSettingsPage {...pageProps} />,
   })
