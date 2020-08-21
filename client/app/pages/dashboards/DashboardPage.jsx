@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import { has, isEmpty } from "lodash";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
@@ -88,6 +88,9 @@ function DashboardComponent(props) {
   const [pageContainer, setPageContainer] = useState(null);
   const [bottomPanelStyles, setBottomPanelStyles] = useState({});
 
+  const hideHeader = has(location.search, "hide_header");
+  const hideParametersUI = has(location.search, "hide_parameters");
+
   useEffect(() => {
     if (pageContainer) {
       const unobserve = resizeObserver(pageContainer, () => {
@@ -111,13 +114,13 @@ function DashboardComponent(props) {
 
   return (
     <div className="container" ref={setPageContainer} data-test={`DashboardId${dashboard.id}Container`}>
-      <DashboardHeader dashboardOptions={dashboardOptions} />
-      {!isEmpty(globalParameters) && (
+      {!hideHeader && (<DashboardHeader dashboardOptions={dashboardOptions} />)}
+      {!hideParametersUI && !isEmpty(globalParameters) && (
         <div className="dashboard-parameters m-b-10 p-15 bg-white tiled" data-test="DashboardParameters">
           <Parameters parameters={globalParameters} onValuesChange={refreshDashboard} />
         </div>
       )}
-      {!isEmpty(filters) && (
+      {!hideParametersUI && !isEmpty(filters) && (
         <div className="m-b-10 p-15 bg-white tiled" data-test="DashboardFilters">
           <Filters filters={filters} onChange={setFilters} />
         </div>
