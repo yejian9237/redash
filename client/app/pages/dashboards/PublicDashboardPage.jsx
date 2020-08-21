@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import { isEmpty, has } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -10,6 +10,7 @@ import DashboardGrid from "@/components/dashboards/DashboardGrid";
 import Filters from "@/components/Filters";
 
 import { Dashboard } from "@/services/dashboard";
+import location from "@/services/location";
 import routes from "@/services/routes";
 
 import logoUrl from "@/assets/images/redash_icon_small.png";
@@ -23,15 +24,20 @@ function PublicDashboard({ dashboard }) {
     dashboard
   );
 
+  const hideHeader = has(location.search, "hide_header");
+  const hideParametersUI = has(location.search, "hide_parameters");
+
   return (
     <div className="container p-t-10 p-b-20">
-      <PageHeader title={dashboard.name} />
-      {!isEmpty(globalParameters) && (
+      {!hideHeader && (
+        <PageHeader title={dashboard.name} />
+      )}
+      {!hideParametersUI && !isEmpty(globalParameters) && (
         <div className="m-b-10 p-15 bg-white tiled">
           <Parameters parameters={globalParameters} onValuesChange={refreshDashboard} />
         </div>
       )}
-      {!isEmpty(filters) && (
+      {!hideParametersUI && !isEmpty(filters) && (
         <div className="m-b-10 p-15 bg-white tiled">
           <Filters filters={filters} onChange={setFilters} />
         </div>
@@ -78,6 +84,8 @@ class PublicDashboardPage extends React.Component {
 
   render() {
     const { loading, dashboard } = this.state;
+    const hideFooter = has(location.search, "hide_footer");
+
     return (
       <div className="public-dashboard-page">
         {loading ? (
@@ -87,6 +95,7 @@ class PublicDashboardPage extends React.Component {
         ) : (
           <PublicDashboard dashboard={dashboard} />
         )}
+        {!hideFooter && (
         <div id="footer">
           <div className="text-center">
             <a href="https://redash.io">
@@ -95,6 +104,7 @@ class PublicDashboardPage extends React.Component {
           </div>
           Powered by <a href="https://redash.io/?ref=public-dashboard">Redash</a>
         </div>
+        )}
       </div>
     );
   }

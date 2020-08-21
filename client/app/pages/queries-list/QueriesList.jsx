@@ -80,7 +80,7 @@ class QueriesList extends React.Component {
       }
     ),
     Columns.custom((text, item) => item.user.name, { title: "创建人", width: "1%" }),
-    Columns.dateTime.sortable({ title: "Created At", field: "创建时间", width: "1%" }),
+    Columns.dateTime.sortable({ title: "创建时间", field: "created_at", width: "1%" }),
     Columns.dateTime.sortable({
       title: "最后执行时间",
       field: "retrieved_at",

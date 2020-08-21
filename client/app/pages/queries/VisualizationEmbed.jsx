@@ -123,7 +123,7 @@ function VisualizationEmbedFooter({
           {!query.hasParameters() && (
             <Dropdown overlay={downloadMenu} disabled={!queryResults} trigger={["click"]} placement="topLeft">
               <Button loading={!queryResults && !!refreshStartedAt} className="m-l-5">
-                下载查询结果
+                另存…
                 <i className="fa fa-caret-up m-l-5" />
               </Button>
             </Dropdown>
