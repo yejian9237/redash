@@ -17,7 +17,7 @@ import { policy } from "@/services/policy";
 import recordEvent from "@/services/recordEvent";
 import routes from "@/services/routes";
 
-export function DataSourcesListComponent({ dataSources }) {
+export function DataSourcesListComponent({ dataSources, onClickCreate }) {
   const items = dataSources.map(dataSource => ({
     title: dataSource.name,
     imgSrc: `${IMG_ROOT}/${dataSource.type}.png`,
@@ -29,7 +29,7 @@ export function DataSourcesListComponent({ dataSources }) {
       There are no data sources yet.
       {policy.isCreateDataSourceEnabled() && (
         <div className="m-t-5">
-          <a className="clickable" onClick={this.showCreateSourceDialog}>
+          <a className="clickable" onClick={onClickCreate} data-test="CreateDataSourceLink">
             Click here
           </a>{" "}
           to add one.
@@ -126,35 +126,12 @@ class DataSourcesList extends React.Component {
       });
   };
 
-  renderDataSources() {
-    const { dataSources } = this.state;
-    const items = dataSources.map(dataSource => ({
-      title: dataSource.name,
-      imgSrc: `${IMG_ROOT}/${dataSource.type}.png`,
-      href: `data_sources/${dataSource.id}`,
-    }));
-
-    return isEmpty(dataSources) ? (
-      <div className="text-center">
-        还没有配置数据源，只有系统管理员才可创建数据源。
-        {policy.isCreateDataSourceEnabled() && (
-          <div className="m-t-5">
-            <a className="clickable" onClick={this.showCreateSourceDialog}>
-              点击添加
-            </a>{" "}
-          </div>
-        )}
-      </div>
-    ) : (
-      <CardsList items={items} />
-    );
-  }
-
   render() {
     const newDataSourceProps = {
       type: "primary",
       onClick: policy.isCreateDataSourceEnabled() ? this.showCreateSourceDialog : null,
       disabled: !policy.isCreateDataSourceEnabled(),
+      "data-test": "CreateDataSourceButton",
     };
 
     return (
@@ -169,7 +146,11 @@ class DataSourcesList extends React.Component {
         {this.state.loading ? (
           <LoadingState className="" />
         ) : (
-          <DynamicComponent name="DataSourcesListComponent" dataSources={this.state.dataSources} />
+          <DynamicComponent
+            name="DataSourcesListComponent"
+            dataSources={this.state.dataSources}
+            onClickCreate={this.showCreateSourceDialog}
+          />
         )}
       </div>
     );
