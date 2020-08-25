@@ -69,6 +69,7 @@ export default function UserInfoForm(props) {
                 name: "group_ids",
                 title: "角色",
                 type: "content",
+                required: false,
                 content: isLoadingGroups ? "加载中..." : <UserGroups data-test="Groups" groups={groups} />,
               },
         ],

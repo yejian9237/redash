@@ -6,7 +6,10 @@ import SchedulePhrase from "@/components/queries/SchedulePhrase";
 import { Query as QueryType } from "@/components/proptypes";
 
 import Tooltip from "antd/lib/tooltip";
-import Icon from "antd/lib/icon";
+
+import WarningFilledIcon from "@ant-design/icons/WarningFilled";
+import QuestionCircleTwoToneIcon from "@ant-design/icons/QuestionCircleTwoTone";
+import LoadingOutlinedIcon from "@ant-design/icons/LoadingOutlined";
 
 import "./Query.less";
 
@@ -21,11 +24,10 @@ export default function QueryFormItem({ query, queryResult, onChange, editMode }
       </small>
     ) : (
       <small>
-        <Icon type="warning" theme="filled" className="warning-icon-danger" /> 该查询没有设置 <i>自动刷新</i>
-        .{" "}
+        <WarningFilledIcon className="warning-icon-danger" /> This query has no <i>refresh schedule</i>.{" "}
         <Tooltip title="要设置提醒，强烈建议使用自动刷新。对于不自动刷新的查询，仅在用户执行时发送一次提醒。">
           <a>
-          强烈推荐 <Icon type="question-circle" theme="twoTone" />
+          强烈推荐 <QuestionCircleTwoToneIcon />
           </a>
         </Tooltip>
       </small>
@@ -43,10 +45,10 @@ export default function QueryFormItem({ query, queryResult, onChange, editMode }
           </a>
         </Tooltip>
       )}
-      <div className="ant-form-explain">{query && queryHint}</div>
+      <div className="ant-form-item-explain">{query && queryHint}</div>
       {query && !queryResult && (
         <div className="m-t-30">
-          <Icon type="loading" className="m-r-5" /> 加载查询结果
+          <LoadingOutlinedIcon className="m-r-5" /> 加载查询结果
         </div>
       )}
     </>

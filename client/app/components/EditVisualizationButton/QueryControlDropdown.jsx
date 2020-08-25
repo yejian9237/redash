@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import Dropdown from "antd/lib/dropdown";
 import Menu from "antd/lib/menu";
 import Button from "antd/lib/button";
-import Icon from "antd/lib/icon";
+
+import PlusCircleFilledIcon from "@ant-design/icons/PlusCircleFilled";
+import ShareAltOutlinedIcon from "@ant-design/icons/ShareAltOutlined";
+import FileOutlinedIcon from "@ant-design/icons/FileOutlined";
+import FileExcelOutlinedIcon from "@ant-design/icons/FileExcelOutlined";
+import EllipsisOutlinedIcon from "@ant-design/icons/EllipsisOutlined";
 
 import QueryResultsLink from "./QueryResultsLink";
 
@@ -13,14 +18,14 @@ export default function QueryControlDropdown(props) {
       {!props.query.isNew() && (!props.query.is_draft || !props.query.is_archived) && (
         <Menu.Item>
           <a target="_self" onClick={() => props.openAddToDashboardForm(props.selectedTab)}>
-            <Icon type="plus-circle" theme="filled" /> 添加至报表
+            <PlusCircleFilledIcon /> 添加至报表
           </a>
         </Menu.Item>
       )}
       {!props.query.isNew() && (
         <Menu.Item>
           <a onClick={() => props.showEmbedDialog(props.query, props.selectedTab)} data-test="ShowEmbedDialogButton">
-            <Icon type="share-alt" /> 嵌入到其他应用
+            <ShareAltOutlinedIcon /> 嵌入到其他应用
           </a>
         </Menu.Item>
       )}
@@ -32,7 +37,7 @@ export default function QueryControlDropdown(props) {
           queryResult={props.queryResult}
           embed={props.embed}
           apiKey={props.apiKey}>
-          <Icon type="file" /> 另存为CSV文件
+          <FileOutlinedIcon /> 另存为CSV文件
         </QueryResultsLink>
       </Menu.Item>
       <Menu.Item>
@@ -43,7 +48,7 @@ export default function QueryControlDropdown(props) {
           queryResult={props.queryResult}
           embed={props.embed}
           apiKey={props.apiKey}>
-          <Icon type="file" /> 另存为TSV文件
+          <FileOutlinedIcon /> 另存为TSV文件
         </QueryResultsLink>
       </Menu.Item>
       <Menu.Item>
@@ -54,7 +59,7 @@ export default function QueryControlDropdown(props) {
           queryResult={props.queryResult}
           embed={props.embed}
           apiKey={props.apiKey}>
-          <Icon type="file-excel" /> 另存为Excel文件
+          <FileExcelOutlinedIcon /> 另存为Excel文件
         </QueryResultsLink>
       </Menu.Item>
     </Menu>
@@ -63,7 +68,7 @@ export default function QueryControlDropdown(props) {
   return (
     <Dropdown trigger={["click"]} overlay={menu} overlayClassName="query-control-dropdown-overlay">
       <Button data-test="QueryControlDropdownButton">
-        <Icon type="ellipsis" rotate={90} />
+        <EllipsisOutlinedIcon rotate={90} />
       </Button>
     </Dropdown>
   );

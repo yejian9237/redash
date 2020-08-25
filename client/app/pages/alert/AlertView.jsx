@@ -22,10 +22,10 @@ import { STATE_CLASS } from "../alerts/AlertsList";
 function AlertState({ state, lastTriggered }) {
   return (
     <div className="alert-state">
-      <span className={`alert-state-indicator label ${STATE_CLASS[state]}`}>状态：{state}</span>
-      {state === "unknown" && <div className="ant-form-explain">提醒设置已确认。</div>}
+      <span className={`alert-state-indicator label ${STATE_CLASS[state]}`}>状态: {state}</span>
+      {state === "unknown" && <div className="ant-form-item-explain">提醒设置已确认。</div>}
       {lastTriggered && (
-        <div className="ant-form-explain">
+        <div className="ant-form-item-explain">
           最后触发时间{" "}
           <span className="alert-last-triggered">
             <TimeAgo date={lastTriggered} />

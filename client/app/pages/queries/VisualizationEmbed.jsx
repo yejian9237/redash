@@ -6,7 +6,6 @@ import { markdown } from "markdown";
 
 import Button from "antd/lib/button";
 import Dropdown from "antd/lib/dropdown";
-import Icon from "antd/lib/icon";
 import Menu from "antd/lib/menu";
 import Tooltip from "antd/lib/tooltip";
 import routeWithApiKeySession from "@/components/ApplicationArea/routeWithApiKeySession";
@@ -17,6 +16,9 @@ import Timer from "@/components/Timer";
 import QueryResultsLink from "@/components/EditVisualizationButton/QueryResultsLink";
 import VisualizationName from "@/components/visualizations/VisualizationName";
 import VisualizationRenderer from "@/components/visualizations/VisualizationRenderer";
+
+import FileOutlinedIcon from "@ant-design/icons/FileOutlined";
+import FileExcelOutlinedIcon from "@ant-design/icons/FileExcelOutlined";
 
 import { VisualizationType } from "@redash/viz/lib";
 import HtmlContent from "@redash/viz/lib/components/HtmlContent";
@@ -72,7 +74,7 @@ function VisualizationEmbedFooter({
           apiKey={apiKey}
           disabled={!queryResults || !queryResults.getData || !queryResults.getData()}
           embed>
-          <Icon type="file" /> 另存为CSV文件
+          <FileOutlinedIcon /> 另存为CSV文件
         </QueryResultsLink>
       </Menu.Item>
       <Menu.Item>
@@ -83,7 +85,7 @@ function VisualizationEmbedFooter({
           apiKey={apiKey}
           disabled={!queryResults || !queryResults.getData || !queryResults.getData()}
           embed>
-          <Icon type="file" /> 另存为TSV文件
+          <FileOutlinedIcon /> 另存为TSV文件
         </QueryResultsLink>
       </Menu.Item>
       <Menu.Item>
@@ -94,7 +96,7 @@ function VisualizationEmbedFooter({
           apiKey={apiKey}
           disabled={!queryResults || !queryResults.getData || !queryResults.getData()}
           embed>
-          <Icon type="file-excel" /> 另存为Excel文件
+          <FileExcelOutlinedIcon /> 另存为Excel文件
         </QueryResultsLink>
       </Menu.Item>
     </Menu>

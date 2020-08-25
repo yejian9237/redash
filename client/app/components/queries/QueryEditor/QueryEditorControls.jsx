@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import Tooltip from "antd/lib/tooltip";
 import Button from "antd/lib/button";
 import Select from "antd/lib/select";
-import { Upload, message, Icon } from 'antd';
+import { Upload, message } from 'antd';
 import KeyboardShortcuts, { humanReadableShortcut } from "@/services/KeyboardShortcuts";
+import { UploadOutlined } from '@ant-design/icons';
 
 import AutocompleteToggle from "./AutocompleteToggle";
 import "./QueryEditorControls.less";
@@ -135,7 +136,7 @@ export default function EditorControl({
       {executeButtonProps !== false && executeButtonProps.title !== '' && (
         <Upload {...uploadProps}>
           <button style={{ width: 100, height: 35 }}>
-            <Icon type="upload" />文件上载
+            <UploadOutlined />文件上载
           </button>
         </Upload>
       )}
