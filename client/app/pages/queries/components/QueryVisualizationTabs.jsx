@@ -17,7 +17,7 @@ function EmptyState({ title, message, refreshButton }) {
     <div className="query-results-empty-state">
       <div className="empty-state-content">
         <div>
-          <img src="/static/images/illustrations/no-query-results.svg" alt="查询没有记录" />
+          <img src="static/images/illustrations/no-query-results.svg" alt="查询结果没有记录" />
         </div>
         <h3>{title}</h3>
         <div className="m-b-20">{message}</div>

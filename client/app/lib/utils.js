@@ -8,6 +8,7 @@ export const IntervalEnum = {
   HOURS: "小时",
   DAYS: "天",
   WEEKS: "周",
+  MILLISECONDS: "毫秒",
 };
 
 export function formatDateTime(value) {
@@ -76,12 +77,12 @@ export function pluralize(text, count) {
   return text + (should ? "" : "");          //英文复数(should ? "s" : "")
 }
 
-export function durationHumanize(duration, options = {}) {
-  if (!duration) {
+export function durationHumanize(durationInSeconds, options = {}) {
+  if (!durationInSeconds) {
     return "-";
   }
   let ret = "";
-  const { interval, count } = secondsToInterval(duration);
+  const { interval, count } = secondsToInterval(durationInSeconds);
   const rounded = Math.round(count);
   if (rounded !== 1 || !options.omitSingleValueNumber) {
     ret = `${rounded} `;
