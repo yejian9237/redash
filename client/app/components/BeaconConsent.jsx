@@ -65,7 +65,7 @@ function BeaconConsent() {
           </div>
           <div className="m-t-15">
             <Text type="secondary">
-              你随时可以进入 <a href="settings/organization">系统设置</a>{" "}
+              你随时可以进入 <a href="settings/general">系统设置</a>{" "}
               页，更改这项配置。
             </Text>
           </div>

@@ -11,7 +11,7 @@ export default function SAMLSettings(props) {
   return (
     <DynamicComponent name="OrganizationSettings.SAMLSettings" {...props}>
       <h4>SAML</h4>
-      <Form.Item label="SAML Enabled">
+      <Form.Item label="SAML 启用">
         <Checkbox
           name="auth_saml_enabled"
           checked={values.auth_saml_enabled}

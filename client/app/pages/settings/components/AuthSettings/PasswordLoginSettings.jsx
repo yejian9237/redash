@@ -22,7 +22,7 @@ export default function PasswordLoginSettings(props) {
           className="m-t-15 m-b-15"
         />
       )}
-      <Form.Item label="Password Login">
+      <Form.Item label="密码登陆">
         <Checkbox
           checked={values.auth_password_login_enabled}
           disabled={isTheOnlyAuthMethod}

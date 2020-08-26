@@ -224,7 +224,7 @@ export default function DynamicForm({
             block
             className="extra-options-button"
             onClick={() => setShowExtraFields(currentShowExtraFields => !currentShowExtraFields)}>
-            Additional Settings
+            附加参数
             <i className={cx("fa m-l-5", { "fa-caret-up": showExtraFields, "fa-caret-down": !showExtraFields })} />
           </Button>
           <Collapse collapsed={!showExtraFields} className="extra-options-content">
@@ -260,6 +260,6 @@ DynamicForm.defaultProps = {
   feedbackIcons: false,
   hideSubmitButton: false,
   defaultShowExtraFields: false,
-  saveText: "Save",
+  saveText: "保存",
   onSubmit: () => {},
 };
