@@ -3,6 +3,7 @@ import Card from "antd/lib/card";
 import Button from "antd/lib/button";
 import Typography from "antd/lib/typography";
 import { clientConfig } from "@/services/auth";
+import Link from "@/components/Link";
 import HelpTrigger from "@/components/HelpTrigger";
 import DynamicComponent from "@/components/DynamicComponent";
 import OrgSettings from "@/services/organizationSettings";
@@ -65,8 +66,8 @@ function BeaconConsent() {
           </div>
           <div className="m-t-15">
             <Text type="secondary">
-              你随时可以进入 <a href="settings/general">系统设置</a>{" "}
-              页，更改这项配置。
+              你随时可以进入{" "}
+              <Link href="settings/general">系统设置</Link> 页，更改这项配置。
             </Text>
           </div>
         </Card>

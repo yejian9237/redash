@@ -5,6 +5,7 @@ import Button from "antd/lib/button";
 import MenuOutlinedIcon from "@ant-design/icons/MenuOutlined";
 import Dropdown from "antd/lib/dropdown";
 import Menu from "antd/lib/menu";
+import Link from "@/components/Link";
 import { Auth, currentUser } from "@/services/auth";
 import settingsMenu from "@/services/settingsMenu";
 import logoUrl from "@/assets/images/redash_icon_small.png";
@@ -17,9 +18,9 @@ export default function MobileNavbar({ getPopupContainer }) {
   return (
     <div className="mobile-navbar">
       <div className="mobile-navbar-logo">
-        <a href="./">
+        <Link href="./">
           <img src={logoUrl} alt="Redash" />
-        </a>
+        </Link>
       </div>
       <div>
         <Dropdown
@@ -30,39 +31,39 @@ export default function MobileNavbar({ getPopupContainer }) {
             <Menu mode="vertical" theme="dark" selectable={false} className="mobile-navbar-menu">
               {currentUser.hasPermission("list_dashboards") && (
                 <Menu.Item key="dashboards">
-                  <a href="dashboards">报表</a>
+                  <Link href="dashboards">报表</Link>
                 </Menu.Item>
               )}
               {currentUser.hasPermission("view_query") && (
                 <Menu.Item key="queries">
-                  <a href="queries">查询</a>
+                  <Link href="queries">查询</Link>
                 </Menu.Item>
               )}
               {currentUser.hasPermission("list_alerts") && (
                 <Menu.Item key="alerts">
-                  <a href="alerts">提醒</a>
+                  <Link href="alerts">提醒</Link>
                 </Menu.Item>
               )}
               <Menu.Item key="profile">
-                <a href="users/me">个人设置</a>
+                <Link href="users/me">个人设置</Link>
               </Menu.Item>
               <Menu.Divider />
               {firstSettingsTab && (
                 <Menu.Item key="settings">
-                  <a href={firstSettingsTab.path}>设置i</a>
+                  <Link href={firstSettingsTab.path}>设置</Link>
                 </Menu.Item>
               )}
               {currentUser.hasPermission("super_admin") && (
                 <Menu.Item key="status">
-                  <a href="admin/status">系统状态</a>
+                  <Link href="admin/status">系统状态</Link>
                 </Menu.Item>
               )}
               {currentUser.hasPermission("super_admin") && <Menu.Divider />}
               <Menu.Item key="help">
                 {/* eslint-disable-next-line react/jsx-no-target-blank */}
-                <a href="https://redash.io/help" target="_blank" rel="noopener">
-                  帮助
-                </a>
+                <Link href="https://redash.io/help" target="_blank" rel="noopener">
+                帮助
+                </Link>
               </Menu.Item>
               <Menu.Item key="logout" onClick={() => Auth.logout()}>
                 退出

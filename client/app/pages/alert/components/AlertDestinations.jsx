@@ -2,6 +2,7 @@ import { without, find, includes, map, toLower } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 
+import Link from "@/components/Link";
 import SelectItemsDialog from "@/components/SelectItemsDialog";
 import { Destination as DestinationType, UserProfile as UserType } from "@/components/proptypes";
 
@@ -89,9 +90,9 @@ export default class AlertDestinations extends React.Component {
         <>
           <i className="fa fa-info-circle" /> Create new destinations in{" "}
           <Tooltip title="在新标签页中打开。">
-            <a href="destinations/new" target="_blank">
+            <Link href="destinations/new" target="_blank">
               提醒设置
-            </a>
+            </Link>
           </Tooltip>
         </>
       ),

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import Alert from "antd/lib/alert";
+import Link from "@/components/Link";
 import LoadingOutlinedIcon from "@ant-design/icons/LoadingOutlined";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import EmptyState from "@/components/empty-state/EmptyState";
@@ -26,13 +27,13 @@ function DeprecatedEmbedFeatureAlert() {
       type="warning"
       message={
         <>
-          你已设置参数 <code>ALLOW_PARAMETERS_IN_EMBEDS</code>，但这个特征暂时不可用。{" "}
-          <a
+          你已设置参数 <code>ALLOW_PARAMETERS_IN_EMBEDS</code>，但该特征暂时不可用。{" "}
+          <Link
             href="https://discuss.redash.io/t/support-for-parameters-in-embedded-visualizations/3337"
             target="_blank"
             rel="noopener noreferrer">
             Read more
-          </a>
+          </Link>
           .
         </>
       }
@@ -85,13 +86,13 @@ function FavoriteList({ title, resource, itemUrl, emptyState }) {
       {!isEmpty(items) && (
         <div className="list-group">
           {items.map(item => (
-            <a key={itemUrl(item)} className="list-group-item" href={itemUrl(item)}>
+            <Link key={itemUrl(item)} className="list-group-item" href={itemUrl(item)}>
               <span className="btn-favourite m-r-5">
                 <i className="fa fa-star" aria-hidden="true" />
               </span>
               {item.name}
               {item.is_draft && <span className="label label-default m-l-5">草稿</span>}
-            </a>
+            </Link>
           ))}
         </div>
       )}
@@ -123,7 +124,7 @@ function DashboardAndQueryFavoritesList() {
                   <span className="btn-favourite m-r-5">
                     <i className="fa fa-star" aria-hidden="true" />
                   </span>
-                  <a href="dashboards">关注的报表</a>
+                  <Link href="dashboards">关注的报表</Link>
                 </p>
               }
             />
@@ -138,7 +139,7 @@ function DashboardAndQueryFavoritesList() {
                   <span className="btn-favourite m-r-5">
                     <i className="fa fa-star" aria-hidden="true" />
                   </span>
-                  <a href="queries">关注的查询</a>
+                  <Link href="queries">关注的查询</Link>
                 </p>
               }
             />

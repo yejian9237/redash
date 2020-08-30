@@ -7,6 +7,7 @@ import Modal from "antd/lib/modal";
 import Input from "antd/lib/input";
 import Tooltip from "antd/lib/tooltip";
 import Divider from "antd/lib/divider";
+import Link from "@/components/Link";
 import HtmlContent from "@redash/viz/lib/components/HtmlContent";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
 import notification from "@/services/notification";
@@ -79,14 +80,17 @@ function TextboxDialog({ dialog, isNew, ...props }) {
           placeholder="请输入文本"
         />
         <small>
-          支持基本的{" "}{" "}
-          <a target="_blank" rel="noopener noreferrer" href="https://www.markdownguide.org/cheat-sheet/#basic-syntax">
+          支持基本的{" "}
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.markdownguide.org/cheat-sheet/#basic-syntax">
             <Tooltip title="在新窗口打开Markdown标记指南">Markdown标记(英文)</Tooltip>
-          </a>
+          </Link>
           ；
-          <a target="_blank" rel="noopener noreferrer" href="https://www.runoob.com/markdown/md-tutorial.html">
+          <Link target="_blank" rel="noopener noreferrer" href="https://www.runoob.com/markdown/md-tutorial.html">
             <Tooltip title="在新窗口打开Markdown菜鸟教程">Markdown菜鸟教程(中文)</Tooltip>
-          </a>
+          </Link>
           。
         </small>
         {text && (

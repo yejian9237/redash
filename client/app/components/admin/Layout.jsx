@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Menu from "antd/lib/menu";
 import PageHeader from "@/components/PageHeader";
+import Link from "@/components/Link";
 
 import "./layout.less";
 
@@ -13,13 +14,13 @@ export default function Layout({ activeTab, children }) {
         <div className="bg-white tiled">
           <Menu selectedKeys={[activeTab]} selectable={false} mode="horizontal">
             <Menu.Item key="system_status">
-              <a href="admin/status">系统状态</a>
+              <Link href="admin/status">系统状态</Link>
             </Menu.Item>
             <Menu.Item key="jobs">
-              <a href="admin/queries/jobs">任务队列状态</a>
+              <Link href="admin/queries/jobs">任务队列状态</Link>
             </Menu.Item>
             <Menu.Item key="outdated_queries">
-              <a href="admin/queries/outdated">超期的查询</a>
+              <Link href="admin/queries/outdated">超期的查询</Link>
             </Menu.Item>
           </Menu>
           {children}

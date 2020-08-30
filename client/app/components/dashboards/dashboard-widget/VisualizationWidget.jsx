@@ -8,6 +8,7 @@ import HtmlContent from "@redash/viz/lib/components/HtmlContent";
 import { currentUser } from "@/services/auth";
 import recordEvent from "@/services/recordEvent";
 import { formatDateTime } from "@/lib/utils";
+import Link from "@/components/Link";
 import Parameters from "@/components/Parameters";
 import TimeAgo from "@/components/TimeAgo";
 import Timer from "@/components/Timer";
@@ -30,27 +31,27 @@ function visualizationWidgetMenuOptions({ widget, canEditDashboard, onParameters
   return compact([
     <Menu.Item key="download_csv" disabled={isQueryResultEmpty}>
       {!isQueryResultEmpty ? (
-        <a href={downloadLink("csv")} download={downloadName("csv")} target="_self">
+        <Link href={downloadLink("csv")} download={downloadName("csv")} target="_self">
           另存为CSV文件
-        </a>
+        </Link>
       ) : (
         "另存为CSV文件"
       )}
     </Menu.Item>,
     <Menu.Item key="download_tsv" disabled={isQueryResultEmpty}>
       {!isQueryResultEmpty ? (
-        <a href={downloadLink("tsv")} download={downloadName("tsv")} target="_self">
+        <Link href={downloadLink("tsv")} download={downloadName("tsv")} target="_self">
           另存为TSV文件
-        </a>
+        </Link>
       ) : (
         "另存为TSV文件"
       )}
     </Menu.Item>,
     <Menu.Item key="download_excel" disabled={isQueryResultEmpty}>
       {!isQueryResultEmpty ? (
-        <a href={downloadLink("xlsx")} download={downloadName("xlsx")} target="_self">
+        <Link href={downloadLink("xlsx")} download={downloadName("xlsx")} target="_self">
           另存为Excel文件
-        </a>
+        </Link>
       ) : (
         "另存为Excel文件"
       )}
@@ -58,7 +59,7 @@ function visualizationWidgetMenuOptions({ widget, canEditDashboard, onParameters
     (canViewQuery || canEditParameters) && <Menu.Divider key="divider" />,
     canViewQuery && (
       <Menu.Item key="view_query">
-        <a href={widget.getQuery().getUrl(true, widget.visualization.id)}>查看查询定义</a>
+        <Link href={widget.getQuery().getUrl(true, widget.visualization.id)}>查看查询定义</Link>
       </Menu.Item>
     ),
     canEditParameters && (

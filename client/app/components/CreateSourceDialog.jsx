@@ -7,6 +7,7 @@ import Modal from "antd/lib/modal";
 import Input from "antd/lib/input";
 import Steps from "antd/lib/steps";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
+import Link from "@/components/Link";
 import { PreviewCard } from "@/components/PreviewCard";
 import EmptyState from "@/components/items-list/components/EmptyState";
 import DynamicForm from "@/components/dynamic-form/DynamicForm";
@@ -117,9 +118,9 @@ class CreateSourceDialog extends React.Component {
         {selectedType.type === "databricks" && (
           <small>
             可以通过JDBC/ODBC的方式使用Databricks数据源。{" "}
-            <a href="https://databricks.com/spark/odbc-driver-download" target="_blank" rel="noopener noreferrer">
+            <Link href="https://databricks.com/spark/odbc-driver-download" target="_blank" rel="noopener noreferrer">
               Databricks ODBC 驱动程序下载
-            </a>
+            </Link>
             .
           </small>
         )}

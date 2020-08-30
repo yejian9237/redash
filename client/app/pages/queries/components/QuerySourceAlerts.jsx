@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "antd/lib/card";
 import WarningFilledIcon from "@ant-design/icons/WarningFilled";
-import Button from "antd/lib/button";
 import Typography from "antd/lib/typography";
+import Link from "@/components/Link";
 import { currentUser } from "@/services/auth";
 
 import useQueryFlags from "../hooks/useQueryFlags";
@@ -21,7 +21,7 @@ export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
         </Typography.Title>
         <p>
           <Typography.Text type="secondary">
-            你可以<a href="queries">查看查询</a>，或者联系系统管理员申请权限。
+            你可以<Link href="queries">查看查询</Link>, ，或者联系系统管理员申请权限。
           </Typography.Text>
         </p>
       </React.Fragment>
@@ -38,12 +38,12 @@ export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
           </p>
 
           <div className="query-source-alerts-actions">
-            <Button type="primary" href="data_sources/new">
+            <Link.Button type="primary" href="data_sources/new">
               创建数据源
-            </Button>
-            <Button type="default" href="groups">
+            </Link.Button>
+            <Link.Button type="default" href="groups">
               管理角色权限
-            </Button>
+            </Link.Button>
           </div>
         </React.Fragment>
       );
