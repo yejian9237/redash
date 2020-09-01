@@ -123,8 +123,8 @@ export default function QueryPageHeader({
         },
         {
           showAPIKey: {
-            isAvailable: !queryFlags.isNew,
-            title: "显示API Key",
+            isAvailable: !clientConfig.disablePublicUrls && !queryFlags.isNew,
+            title: "显示 API Key",
             onClick: openApiKeyDialog,
           },
         },
@@ -199,7 +199,7 @@ export default function QueryPageHeader({
 
         {!queryFlags.isNew && (
           <Dropdown overlay={moreActionsMenu} trigger={["click"]}>
-            <Button>
+            <Button data-test="QueryPageHeaderMoreButton">
               <EllipsisOutlinedIcon rotate={90} />
             </Button>
           </Dropdown>
