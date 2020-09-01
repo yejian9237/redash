@@ -152,7 +152,7 @@ class GroupMembers extends React.Component {
             {!controller.isLoaded && <LoadingState className="" />}
             {controller.isLoaded && controller.isEmpty && (
               <div className="text-center">
-                <p>There are no members in this group yet.</p>
+                <p>该角色尚没有成员。</p>
                 {currentUser.isAdmin && (
                   <Button type="primary" onClick={this.addMembers}>
                     <i className="fa fa-plus m-r-5" />
