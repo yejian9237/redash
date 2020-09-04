@@ -7,7 +7,7 @@ import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
 import recordEvent from "@/services/recordEvent";
 
 const formFields = [
-  { required: true, name: "name", title: "Name", type: "text", autoFocus: true },
+  { required: true, name: "name", title: "姓名", type: "text", autoFocus: true },
   { required: true, name: "email", title: "Email", type: "email" },
 ];
 
@@ -17,39 +17,15 @@ function CreateUserDialog({ dialog }) {
     recordEvent("view", "page", "users/new");
   }, []);
 
-<<<<<<< HEAD
-  const createUser = useCallback(() => {
-    if (formRef.current) {
-      formRef.current.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          dialog.close(values).catch(setError);
-        }
-      });
-    }
-  }, [dialog]);
-
-  const formFields = useMemo(() => {
-    const common = { required: true, props: { onPressEnter: createUser } };
-    return [
-      { ...common, name: "name", title: "姓名", type: "text", autoFocus: true },
-      { ...common, name: "email", title: "电子邮箱", type: "email" },
-    ];
-  }, [createUser]);
-
-  return (
-    <Modal {...dialog.props} title="新建用户" okText="创建" cancelText="取消" onOk={createUser}>
-      <DynamicForm fields={formFields} ref={formRef} hideSubmitButton />
-      {error && <Alert message={error.message} type="error" showIcon />}
-=======
   const handleSubmit = useCallback(values => dialog.close(values).catch(setError), [dialog]);
 
   return (
     <Modal
       {...dialog.props}
-      title="Create a New User"
+      title="新建用户"
       footer={[
         <Button key="cancel" {...dialog.props.cancelButtonProps} onClick={dialog.dismiss}>
-          Cancel
+          取消
         </Button>,
         <Button
           key="submit"
@@ -58,7 +34,7 @@ function CreateUserDialog({ dialog }) {
           type="primary"
           form="userForm"
           data-test="SaveUserButton">
-          Create
+          创建
         </Button>,
       ]}
       wrapProps={{
@@ -66,7 +42,6 @@ function CreateUserDialog({ dialog }) {
       }}>
       <DynamicForm id="userForm" fields={formFields} onSubmit={handleSubmit} hideSubmitButton />
       {error && <Alert message={error.message} type="error" showIcon data-test="CreateUserErrorAlert" />}
->>>>>>> 32b41e41123a038e14078ed7ae081c4f3591b443
     </Modal>
   );
 }
