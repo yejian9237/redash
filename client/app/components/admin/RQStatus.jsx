@@ -37,7 +37,7 @@ const queryJobsColumns = [
   { title: "队列", dataIndex: "origin" },
   { title: "查询ID", dataIndex: "meta.query_id" },
   { title: "组织ID", dataIndex: "meta.org_id" },
-  { title: "数据元ID", dataIndex: "meta.data_source_id" },
+  { title: "数据源ID", dataIndex: "meta.data_source_id" },
   { title: "用户ID", dataIndex: "meta.user_id" },
   Columns.custom(scheduled => scheduled.toString(), { title: "Scheduled", dataIndex: "meta.scheduled" }),
   Columns.timeAgo({ title: "开始时间", dataIndex: "started_at" }),

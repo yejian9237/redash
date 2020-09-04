@@ -38,8 +38,8 @@ class Email(BaseDestination):
             html = alert.custom_body
         else:
             html = """
-            Check <a href="{host}/alerts/{alert_id}">提醒</a> / check
-            <a href="{host}/queries/{query_id}">查询</a> </br>.
+            查看<a href="{host}/alerts/{alert_id}">提醒</a> / 
+            查看<a href="{host}/queries/{query_id}">查询</a> </br>.
             """.format(
                 host=host, alert_id=alert.id, query_id=query.id
             )
