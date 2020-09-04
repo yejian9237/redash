@@ -11,6 +11,15 @@ export const IntervalEnum = {
   MILLISECONDS: "毫秒",
 };
 
+export const AbbreviatedTimeUnits = {
+  SECONDS: "s",
+  MINUTES: "m",
+  HOURS: "h",
+  DAYS: "d",
+  WEEKS: "w",
+  MILLISECONDS: "ms",
+};
+
 export function formatDateTime(value) {
   if (!value) {
     return "";
