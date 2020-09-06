@@ -20,6 +20,15 @@ export const AbbreviatedTimeUnits = {
   MILLISECONDS: "ms",
 };
 
+export const AbbreviatedTimeUnits = {
+  SECONDS: "s",
+  MINUTES: "m",
+  HOURS: "h",
+  DAYS: "d",
+  WEEKS: "w",
+  MILLISECONDS: "ms",
+};
+
 export function formatDateTime(value) {
   if (!value) {
     return "";
