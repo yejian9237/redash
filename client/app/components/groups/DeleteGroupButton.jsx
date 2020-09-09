@@ -16,7 +16,7 @@ function deleteGroup(event, group, onGroupDeleted) {
     cancelText: "取消",
     onOk: () => {
       Group.delete(group).then(() => {
-        notification.success("Group deleted successfully.");
+        notification.success("角色删除成功。");
         onGroupDeleted();
       });
     },
