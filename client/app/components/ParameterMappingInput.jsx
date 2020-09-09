@@ -331,7 +331,7 @@ class MappingEditor extends React.Component {
     return (
       <div className="parameter-mapping-editor" data-test="EditParamMappingPopover">
         <header>
-          Edit Source and Value <HelpTrigger type="VALUE_SOURCE_OPTIONS" />
+          编辑来源和值 <HelpTrigger type="VALUE_SOURCE_OPTIONS" />
         </header>
         <ParameterMappingInput
           mapping={mapping}
@@ -340,9 +340,9 @@ class MappingEditor extends React.Component {
           inputError={inputError}
         />
         <footer>
-          <Button onClick={this.hide}>Cancel</Button>
+          <Button onClick={this.hide}>取消</Button>
           <Button onClick={this.save} disabled={!!inputError} type="primary">
-            OK
+            确定
           </Button>
         </footer>
       </div>
@@ -582,7 +582,7 @@ export class ParameterMappingListInput extends React.Component {
       <div className="parameters-mapping-list">
         <Table dataSource={dataSource} size="middle" pagination={false} rowKey={(record, idx) => `row${idx}`}>
           <Table.Column
-            title="Title"
+            title="名称"
             dataIndex="mapping"
             key="title"
             render={mapping => (
@@ -594,20 +594,20 @@ export class ParameterMappingListInput extends React.Component {
             )}
           />
           <Table.Column
-            title="Keyword"
+            title="代码"
             dataIndex="mapping"
             key="keyword"
             className="keyword"
             render={mapping => <code>{`{{ ${mapping.name} }}`}</code>}
           />
           <Table.Column
-            title="Default Value"
+            title="默认值"
             dataIndex="mapping"
             key="value"
             render={mapping => this.constructor.getDefaultValue(mapping, this.props.existingParams)}
           />
           <Table.Column
-            title="Value Source"
+            title="来源"
             dataIndex="mapping"
             key="source"
             render={mapping => {

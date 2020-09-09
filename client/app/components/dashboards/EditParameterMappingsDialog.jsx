@@ -101,6 +101,8 @@ class EditParameterMappingsDialog extends React.Component {
       <Modal
         {...dialog.props}
         title="参数"
+        okText = "确定"
+        cancelText = "取消"
         onOk={() => this.saveWidget()}
         okButtonProps={{ loading: this.state.saveInProgress }}
         width={700}>
@@ -116,4 +118,6 @@ class EditParameterMappingsDialog extends React.Component {
   }
 }
 
-export default wrapDialog(EditParameterMappingsDialog);
+export default wrapDialog(EditParameterMapp        okText = "确定"
+cancelText = "取消"
+ingsDialog);
