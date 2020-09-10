@@ -118,4 +118,6 @@ class EditParameterMappingsDialog extends React.Component {
   }
 }
 
-export default wrapDialog(EditParameterMappingsDialog);
+export default wrapDialog(EditParameterMapp        okText = "确定"
+cancelText = "取消"
+ingsDialog);
