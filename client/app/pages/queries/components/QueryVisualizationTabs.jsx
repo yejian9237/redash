@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import { find, orderBy } from "lodash";
@@ -121,6 +121,8 @@ export default function QueryVisualizationTabs({
   const isFirstVisualization = useCallback(visId => visId === orderedVisualizations[0].id, [orderedVisualizations]);
   const isMobile = useMedia({ maxWidth: 768 });
 
+  const [filters, setFilters] = useState([]);
+
   return (
     <Tabs
       {...tabsProps}
@@ -143,7 +145,13 @@ export default function QueryVisualizationTabs({
             />
           }>
           {queryResult ? (
-            <VisualizationRenderer visualization={visualization} queryResult={queryResult} context="query" />
+            <VisualizationRenderer
+              visualization={visualization}
+              queryResult={queryResult}
+              context="query"
+              filters={filters}
+              onFiltersChange={setFilters}
+            />
           ) : (
             <EmptyState
               title="查询没有记录"
