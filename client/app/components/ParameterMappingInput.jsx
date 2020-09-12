@@ -550,13 +550,13 @@ export class ParameterMappingListInput extends React.Component {
       case MappingType.DashboardMapToExisting:
         return (
           <Fragment>
-            Dashboard <Tag className="tag">{mapTo}</Tag>
+            报表参数 <Tag className="tag">{mapTo}</Tag>
           </Fragment>
         );
       case MappingType.WidgetLevel:
-        return "Widget parameter";
+        return "部件参数";
       case MappingType.StaticValue:
-        return "Static value";
+        return "静态值";
       default:
         return ""; // won't happen (typescript-ftw)
     }
