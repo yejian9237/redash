@@ -44,7 +44,7 @@ function SearchInputInfoIcon({ searchColumns }) {
       placement="topRight"
       content={
         <div className="table-visualization-search-info-content">
-          Search {getSearchColumns(searchColumns, { renderColumn: col => <code key={col.name}>{col.title}</code> })}
+          搜索 {getSearchColumns(searchColumns, { renderColumn: col => <code key={col.name}>{col.title}</code> })}
         </div>
       }>
       <InfoCircleFilledIcon className="table-visualization-search-info-icon" />
