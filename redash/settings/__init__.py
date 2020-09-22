@@ -510,11 +510,4 @@ ENFORCE_CSRF = parse_boolean(
     os.environ.get("REDASH_ENFORCE_CSRF", "false")
 )
 
-# dazdata
-DAZ_COMMON = os.environ.get("REDASH_DAZ_COMMON", "")
-
-DAZ_CONTRACT = os.environ.get("REDASH_DAZ_CONTRACT", "")
-
-DAZ_EXCEL = os.environ.get("REDASH_DAZ_EXCEL", "")
-DAZ_USER = os.environ.get("REDASH_DAZ_USER", "")
-DAZ_ENUM = os.environ.get("REDASH_DAZ_ENUM", "")
+CSRF_TIME_LIMIT = int(os.environ.get("REDASH_CSRF_TIME_LIMIT", 3600 * 6))
