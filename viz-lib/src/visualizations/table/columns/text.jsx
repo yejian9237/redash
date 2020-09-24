@@ -59,5 +59,5 @@ export default function initTextColumn(column) {
   return TextColumn;
 }
 
-initTextColumn.friendlyName = "Text";
+initTextColumn.friendlyName = "文本";
 initTextColumn.Editor = Editor;

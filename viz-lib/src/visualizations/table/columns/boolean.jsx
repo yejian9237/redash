@@ -72,5 +72,5 @@ export default function initBooleanColumn(column) {
   return BooleanColumn;
 }
 
-initBooleanColumn.friendlyName = "Boolean";
+initBooleanColumn.friendlyName = "布尔";
 initBooleanColumn.Editor = Editor;
