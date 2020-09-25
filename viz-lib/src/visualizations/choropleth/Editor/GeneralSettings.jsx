@@ -1,91 +1,86 @@
-import { map } from "lodash";
-import React, { useMemo } from "react";
+import { isString, map, filter, get } from "lodash";
+import React, { useMemo, useCallback } from "react";
+import * as Grid from "antd/lib/grid";
 import { EditorPropTypes } from "@/visualizations/prop-types";
 import { Section, Select } from "@/components/visualizations/editor";
-import { inferCountryCodeType } from "./utils";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+import useLoadGeoJson from "../hooks/useLoadGeoJson";
+import { getGeoJsonFields } from "./utils";
 
 export default function GeneralSettings({ options, data, onOptionsChange }) {
-  const countryCodeTypes = useMemo(() => {
-    switch (options.mapType) {
-      case "countries":
-        return {
-          name: "国家简称(英文)",
-          name_long: "国家全称(英文)",
-          abbrev: "国家缩写(英文)",
-          iso_a2: "ISO国家代码(2字母)",
-          iso_a3: "ISO国家代码(3字母)",
-          iso_n3: "ISO国家代码(3数字)",
-        };
-      case "subdiv_japan":
-        return {
-          name: "日本行政区划名称(英文)",
-          name_local: "日本行政区划名称(日文)",
-          iso_3166_2: "ISO-3166-2日本行政区划代码",
-        };
-      default:
-        return {};
-    }
-  }, [options.mapType]);
+  const [geoJson, isLoadingGeoJson] = useLoadGeoJson(options.mapType);
+  const geoJsonFields = useMemo(() => getGeoJsonFields(geoJson), [geoJson]);
 
-  const handleChangeAndInferType = newOptions => {
-    newOptions.countryCodeType =
-      inferCountryCodeType(
-        newOptions.mapType || options.mapType,
-        data ? data.rows : [],
-        newOptions.countryCodeColumn || options.countryCodeColumn
-      ) || options.countryCodeType;
-    onOptionsChange(newOptions);
-  };
+  // While geoJson is loading - show last selected field in select
+  const targetFields = isLoadingGeoJson ? filter([options.targetField], isString) : geoJsonFields;
+
+  const fieldNames = get(visualizationsSettings, `choroplethAvailableMaps.${options.mapType}.fieldNames`, {});
+
+  const handleMapChange = useCallback(
+    mapType => {
+      onOptionsChange({ mapType: mapType || null });
+    },
+    [onOptionsChange]
+  );
 
   return (
     <React.Fragment>
       <Section>
         <Select
-          label="地图选择"
+          label="Map"
           data-test="Choropleth.Editor.MapType"
           defaultValue={options.mapType}
-          onChange={mapType => handleChangeAndInferType({ mapType })}>
-          <Select.Option key="countries" data-test="Choropleth.Editor.MapType.Countries">
-            全球国家地图
-          </Select.Option>
-          <Select.Option key="subdiv_japan" data-test="Choropleth.Editor.MapType.Japan">
-            日本行政区划图
-          </Select.Option>
-        </Select>
-      </Section>
-
-      <Section>
-        <Select
-          label="地理区域取值"
-          data-test="Choropleth.Editor.KeyColumn"
-          defaultValue={options.countryCodeColumn}
-          onChange={countryCodeColumn => handleChangeAndInferType({ countryCodeColumn })}>
-          {map(data.columns, ({ name }) => (
-            <Select.Option key={name} data-test={`Choropleth.Editor.KeyColumn.${name}`}>
-              {name}
+          onChange={handleMapChange}>
+          {map(visualizationsSettings.choroplethAvailableMaps, (_, mapType) => (
+            <Select.Option key={mapType} data-test={`Choropleth.Editor.MapType.${mapType}`}>
+              {get(visualizationsSettings, `choroplethAvailableMaps.${mapType}.name`, mapType)}
             </Select.Option>
           ))}
         </Select>
       </Section>
 
       <Section>
-        <Select
-          label="地理区域值类型"
-          data-test="Choropleth.Editor.KeyType"
-          value={options.countryCodeType}
-          onChange={countryCodeType => onOptionsChange({ countryCodeType })}>
-          {map(countryCodeTypes, (name, type) => (
-            <Select.Option key={type} data-test={`Choropleth.Editor.KeyType.${type}`}>
-              {name}
-            </Select.Option>
-          ))}
-        </Select>
+        <Grid.Row gutter={15}>
+          <Grid.Col span={12}>
+            <Select
+              label="Key Column"
+              className="w-100"
+              data-test="Choropleth.Editor.KeyColumn"
+              disabled={data.columns.length === 0}
+              defaultValue={options.keyColumn}
+              onChange={keyColumn => onOptionsChange({ keyColumn })}>
+              {map(data.columns, ({ name }) => (
+                <Select.Option key={name} data-test={`Choropleth.Editor.KeyColumn.${name}`}>
+                  {name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Select
+              label="Target Field"
+              className="w-100"
+              data-test="Choropleth.Editor.TargetField"
+              disabled={isLoadingGeoJson || targetFields.length === 0}
+              loading={isLoadingGeoJson}
+              value={options.targetField}
+              onChange={targetField => onOptionsChange({ targetField })}>
+              {map(targetFields, field => (
+                <Select.Option key={field} data-test={`Choropleth.Editor.TargetField.${field}`}>
+                  {fieldNames[field] || field}
+                </Select.Option>
+              ))}
+            </Select>
+          </Grid.Col>
+        </Grid.Row>
       </Section>
 
       <Section>
         <Select
           label="数据取值"
           data-test="Choropleth.Editor.ValueColumn"
+          disabled={data.columns.length === 0}
           defaultValue={options.valueColumn}
           onChange={valueColumn => onOptionsChange({ valueColumn })}>
           {map(data.columns, ({ name }) => (

@@ -1,4 +1,6 @@
-import React from "react";
+import { map } from "lodash";
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 import { useDebouncedCallback } from "use-debounce";
 import * as Grid from "antd/lib/grid";
 import {
@@ -12,49 +14,29 @@ import {
 } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
 
-function TemplateFormatHint({ mapType }) {
-  // eslint-disable-line react/prop-types
+import useLoadGeoJson from "../hooks/useLoadGeoJson";
+import { getGeoJsonFields } from "./utils";
+
+function TemplateFormatHint({ geoJsonProperties }) {
   return (
     <ContextHelp placement="topLeft" arrowPointAtCenter>
       <div style={{ paddingBottom: 5 }}>
-        All query result columns can be referenced using <code>{"{{ column_name }}"}</code> syntax.
+        <div>
+          All query result columns can be referenced using <code>{"{{ column_name }}"}</code> syntax.
+        </div>
+        <div>
+          Use <code>{"{{ @@value }}"}</code> to access formatted value.
+        </div>
       </div>
-      <div style={{ paddingBottom: 5 }}>Use special names to access additional properties:</div>
-      <div>
-        <code>{"{{ @@value }}"}</code> formatted value;
-      </div>
-      {mapType === "countries" && (
+      {geoJsonProperties.length > 0 && (
         <React.Fragment>
-          <div>
-            <code>{"{{ @@name }}"}</code> 国家简称(英文);
-          </div>
-          <div>
-            <code>{"{{ @@name_long }}"}</code> 国家全称(英文);
-          </div>
-          <div>
-            <code>{"{{ @@abbrev }}"}</code> 国家缩写(英文);
-          </div>
-          <div>
-            <code>{"{{ @@iso_a2 }}"}</code> ISO国家代码(2字母);
-          </div>
-          <div>
-            <code>{"{{ @@iso_a3 }}"}</code> ISO国家代码(3字母);
-          </div>
-          <div>
-            <code>{"{{ @@iso_n3 }}"}</code> ISO国家代码(3数字).
-          </div>
-        </React.Fragment>
-      )}
-      {mapType === "subdiv_japan" && (
-        <React.Fragment>
-          <div>
-            <code>{"{{ @@name }}"}</code> 日本行政区划名称(英文);
-          </div>
-          <div>
-            <code>{"{{ @@name_local }}"}</code> 日本行政区划名称(日文);
-          </div>
-          <div>
-            <code>{"{{ @@iso_3166_2 }}"}</code> 5字母ISO日本行政区划代码(JP-xx);
+          <div className="p-b-5">GeoJSON properties could be accessed by these names:</div>
+          <div style={{ maxHeight: 300, overflow: "auto" }}>
+            {map(geoJsonProperties, property => (
+              <div key={property}>
+                <code>{`{{ @@${property}}}`}</code>
+              </div>
+            ))}
           </div>
         </React.Fragment>
       )}
@@ -62,10 +44,20 @@ function TemplateFormatHint({ mapType }) {
   );
 }
 
+TemplateFormatHint.propTypes = {
+  geoJsonProperties: PropTypes.arrayOf(PropTypes.string),
+};
+
+TemplateFormatHint.defaultProps = {
+  geoJsonProperties: [],
+};
+
 export default function GeneralSettings({ options, onOptionsChange }) {
   const [onOptionsChangeDebounced] = useDebouncedCallback(onOptionsChange, 200);
+  const [geoJson] = useLoadGeoJson(options.mapType);
+  const geoJsonFields = useMemo(() => getGeoJsonFields(geoJson), [geoJson]);
 
-  const templateFormatHint = <TemplateFormatHint mapType={options.mapType} />;
+  const templateFormatHint = <TemplateFormatHint geoJsonProperties={geoJsonFields} />;
 
   return (
     <div className="choropleth-visualization-editor-format-settings">
