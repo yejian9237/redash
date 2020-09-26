@@ -26,7 +26,7 @@ export default function QueryControlDropdown(props) {
       {!clientConfig.disablePublicUrls && !props.query.isNew() && (
         <Menu.Item>
           <a onClick={() => props.showEmbedDialog(props.query, props.selectedTab)} data-test="ShowEmbedDialogButton">
-            <ShareAltOutlinedIcon /> 嵌入到其他应用
+            <ShareAltOutlinedIcon /> 嵌入到其它应用
           </a>
         </Menu.Item>
       )}
