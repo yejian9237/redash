@@ -28,7 +28,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }) {
     <React.Fragment>
       <Section>
         <Select
-          label="Map"
+          label="地图"
           data-test="Choropleth.Editor.MapType"
           defaultValue={options.mapType}
           onChange={handleMapChange}>
@@ -44,7 +44,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }) {
         <Grid.Row gutter={15}>
           <Grid.Col span={12}>
             <Select
-              label="Key Column"
+              label="地理区域取值"
               className="w-100"
               data-test="Choropleth.Editor.KeyColumn"
               disabled={data.columns.length === 0}
@@ -59,7 +59,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }) {
           </Grid.Col>
           <Grid.Col span={12}>
             <Select
-              label="Target Field"
+              label="地图对应字段"
               className="w-100"
               data-test="Choropleth.Editor.TargetField"
               disabled={isLoadingGeoJson || targetFields.length === 0}
