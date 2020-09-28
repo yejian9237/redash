@@ -19,12 +19,12 @@ function wrapComponentWithSettings(WrappedComponent) {
           name: "全球国家地图",
           url: countriesDataUrl,
           fieldNames: {
-            name: "Short name",
-            name_long: "Full name",
-            abbrev: "Abbreviated name",
-            iso_a2: "ISO code (2 letters)",
-            iso_a3: "ISO code (3 letters)",
-            iso_n3: "ISO code (3 digits)",
+            name: "简称",
+            name_long: "全称",
+            abbrev: "缩写",
+            iso_a2: "ISO代码(2字母)",
+            iso_a3: "ISO代码(3字母)",
+            iso_n3: "ISO代码(3数字)",
           },
         },
         usa: {
