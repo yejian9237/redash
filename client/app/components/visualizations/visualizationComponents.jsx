@@ -32,7 +32,7 @@ function wrapComponentWithSettings(WrappedComponent) {
           url: usaDataUrl,
           fieldNames: {
             name: "Name",
-            ns_code: "National Standard ANSI Code (8-character)",
+            ns_code: "美国ANSI编码(8字母)",
             geoid: "Geographic ID",
             usps_abbrev: "USPS Abbreviation",
             fips_code: "FIPS Code (2-character)",
@@ -42,7 +42,7 @@ function wrapComponentWithSettings(WrappedComponent) {
           name: "日本行政地图",
           url: subdivJapanDataUrl,
           fieldNames: {
-            name: "Name",
+            name: "名称",
             name_alt: "Name (alternative)",
             name_local: "Name (local)",
             iso_3166_2: "ISO-3166-2",
