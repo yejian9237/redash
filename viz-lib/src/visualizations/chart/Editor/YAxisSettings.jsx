@@ -39,7 +39,7 @@ export default function YAxisSettings({ options, onOptionsChange }) {
               data-test="Chart.YAxis.AlignAtZero"
               defaultChecked={options.alignYAxesAtZero}
               onChange={alignYAxesAtZero => onOptionsChange({ alignYAxesAtZero })}>
-              Align Y Axes at Zero
+              Y轴按零刻度对齐
             </Switch>
           </Section>
         </React.Fragment>
