@@ -13,7 +13,7 @@ export default function useFormatQuery(query, syntax, onChange) {
         handleChange(extend(query.clone(), { query: queryText }));
       })
       .catch(error =>
-        notification.error(get(error, "response.data.message", "Failed to format query: unknown error."))
+        notification.error(get(error, "response.data.message", "格式化脚本失败。"))
       );
   }, [query, syntax, handleChange]);
 }
