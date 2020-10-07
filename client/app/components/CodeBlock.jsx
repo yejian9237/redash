@@ -59,7 +59,7 @@ export default class CodeBlock extends React.Component {
     const { copyable, children, ...props } = this.props;
 
     const copyButton = (
-      <Tooltip title={this.state.copied || "Copy"}>
+      <Tooltip title={this.state.copied || "复制"}>
         <Button icon={<CopyOutlinedIcon />} type="dashed" size="small" onClick={this.copy} />
       </Tooltip>
     );
