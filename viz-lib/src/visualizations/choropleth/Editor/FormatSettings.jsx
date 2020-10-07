@@ -22,15 +22,15 @@ function TemplateFormatHint({ geoJsonProperties }) {
     <ContextHelp placement="topLeft" arrowPointAtCenter>
       <div style={{ paddingBottom: 5 }}>
         <div>
-          All query result columns can be referenced using <code>{"{{ column_name }}"}</code> syntax.
+          查询结果集的所有列都可以在模板里使用，表达形式：<code>{"{{ column_name }}"}</code>。
         </div>
         <div>
-          Use <code>{"{{ @@value }}"}</code> to access formatted value.
+          使用形如：<code>{"{{ @@value }}"}</code>获取视图格式化值.
         </div>
       </div>
       {geoJsonProperties.length > 0 && (
         <React.Fragment>
-          <div className="p-b-5">GeoJSON properties could be accessed by these names:</div>
+          <div className="p-b-5">可以使用如下 GeoJSON 数据属性:</div>
           <div style={{ maxHeight: 300, overflow: "auto" }}>
             {map(geoJsonProperties, property => (
               <div key={property}>
