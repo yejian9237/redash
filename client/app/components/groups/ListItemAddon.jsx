@@ -8,7 +8,7 @@ export default function ListItemAddon({ isSelected, isStaged, alreadyInGroup, de
   }
   if (alreadyInGroup) {
     return (
-      <Tooltip title="Already selected">
+      <Tooltip title="已选择">
         <i className="fa fa-check" />
       </Tooltip>
     );
