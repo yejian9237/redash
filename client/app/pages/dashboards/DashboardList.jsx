@@ -29,12 +29,12 @@ const sidebarMenu = [
   {
     key: "all",
     href: "dashboards",
-    title: "All Dashboards",
+    title: "所有报表",
   },
   {
     key: "favorites",
     href: "dashboards/favorites",
-    title: "Favorites",
+    title: "关注的报表",
     icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
   },
 ];

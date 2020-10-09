@@ -32,25 +32,25 @@ const sidebarMenu = [
   {
     key: "all",
     href: "queries",
-    title: "All Queries",
+    title: "所有查询",
   },
   {
     key: "favorites",
     href: "queries/favorites",
-    title: "Favorites",
+    title: "关注的查询",
     icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
   },
   {
     key: "my",
     href: "queries/my",
-    title: "My Queries",
+    title: "我的查询",
     icon: () => <Sidebar.ProfileImage user={currentUser} />,
     isAvailable: () => currentUser.hasPermission("create_query"),
   },
   {
     key: "archive",
     href: "queries/archive",
-    title: "Archived",
+    title: "归档的查询",
     icon: () => <Sidebar.MenuIcon icon="fa fa-archive" />,
   },
 ];
