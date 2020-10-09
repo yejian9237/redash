@@ -6,6 +6,7 @@ import cx from "classnames";
 import Button from "antd/lib/button";
 import Checkbox from "antd/lib/checkbox";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
+import DynamicComponent from "@/components/DynamicComponent";
 import DashboardGrid from "@/components/dashboards/DashboardGrid";
 import Parameters from "@/components/Parameters";
 import Filters from "@/components/Filters";
@@ -114,7 +115,14 @@ function DashboardComponent(props) {
 
   return (
     <div className="container" ref={setPageContainer} data-test={`DashboardId${dashboard.id}Container`}>
-      {!hideHeader && (<DashboardHeader dashboardOptions={dashboardOptions} />)}
+      {!hideHeader && (
+        <DashboardHeader
+          dashboardOptions={dashboardOptions}
+          headerExtra={
+            <DynamicComponent name="Dashboard.HeaderExtra" dashboard={dashboard} dashboardOptions={dashboardOptions} />
+          }
+        />
+      )}
       {!hideParametersUI && !isEmpty(globalParameters) && (
         <div className="dashboard-parameters m-b-10 p-15 bg-white tiled" data-test="DashboardParameters">
           <Parameters parameters={globalParameters} onValuesChange={refreshDashboard} />

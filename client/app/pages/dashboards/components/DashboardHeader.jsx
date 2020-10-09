@@ -167,7 +167,7 @@ DashboardMoreOptionsButton.propTypes = {
   dashboardOptions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-function DashboardControl({ dashboardOptions }) {
+function DashboardControl({ dashboardOptions, headerExtra }) {
   const {
     dashboard,
     togglePublished,
@@ -199,6 +199,7 @@ function DashboardControl({ dashboardOptions }) {
               </Button>
             </Tooltip>
           )}
+          {headerExtra}
           {showShareButton && (
             <Tooltip title="报表共享设置">
               <Button
@@ -219,9 +220,10 @@ function DashboardControl({ dashboardOptions }) {
 
 DashboardControl.propTypes = {
   dashboardOptions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  headerExtra: PropTypes.node,
 };
 
-function DashboardEditControl({ dashboardOptions }) {
+function DashboardEditControl({ dashboardOptions, headerExtra }) {
   const { setEditingLayout, doneBtnClickedWhileSaving, dashboardStatus, retrySaveDashboardLayout } = dashboardOptions;
   let status;
   if (dashboardStatus === DashboardStatusEnum.SAVED) {
@@ -251,26 +253,29 @@ function DashboardEditControl({ dashboardOptions }) {
           {!doneBtnClickedWhileSaving && <i className="fa fa-check m-r-5" />} 保存
         </Button>
       )}
+      {headerExtra}
     </div>
   );
 }
 
 DashboardEditControl.propTypes = {
   dashboardOptions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  headerExtra: PropTypes.node,
 };
 
-export default function DashboardHeader({ dashboardOptions }) {
+export default function DashboardHeader({ dashboardOptions, headerExtra }) {
   const { editingLayout } = dashboardOptions;
   const DashboardControlComponent = editingLayout ? DashboardEditControl : DashboardControl;
 
   return (
     <div className="dashboard-header">
       <DashboardPageTitle dashboardOptions={dashboardOptions} />
-      <DashboardControlComponent dashboardOptions={dashboardOptions} />
+      <DashboardControlComponent dashboardOptions={dashboardOptions} headerExtra={headerExtra} />
     </div>
   );
 }
 
 DashboardHeader.propTypes = {
   dashboardOptions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  headerExtra: PropTypes.node,
 };
