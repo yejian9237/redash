@@ -257,7 +257,7 @@ export class ParameterMappingInput extends React.Component {
 
     return (
       <Form layout="horizontal">
-        <Form.Item label="Source" {...this.formItemProps}>
+        <Form.Item label="来源" {...this.formItemProps}>
           {this.renderMappingTypeSelector()}
         </Form.Item>
         <Form.Item
