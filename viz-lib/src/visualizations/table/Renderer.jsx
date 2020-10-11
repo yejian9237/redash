@@ -29,10 +29,10 @@ function getSearchColumns(columns, { limit = Infinity, renderColumn = col => col
   const firstColumns = map(columns.slice(0, limit), col => renderColumn(col));
   const restColumns = map(columns.slice(limit), col => col.title);
   if (restColumns.length > 0) {
-    return [...joinColumns(firstColumns), ` and ${restColumns.length} others`];
+    return [...joinColumns(firstColumns), ` 和其 ${restColumns.length} 项内容`];
   }
   if (firstColumns.length > 1) {
-    return [...joinColumns(initial(firstColumns)), ` and `, last(firstColumns)];
+    return [...joinColumns(initial(firstColumns)), ` 和 `, last(firstColumns)];
   }
   return firstColumns;
 }
@@ -61,7 +61,7 @@ function SearchInput({ searchColumns, ...props }) {
   return (
     <Input.Search
       {...props}
-      placeholder={`Search ${getSearchColumns(searchColumns, { limit: searchColumnsLimit }).join("")}...`}
+      placeholder={`搜索 ${getSearchColumns(searchColumns, { limit: searchColumnsLimit }).join("")}...`}
       suffix={searchColumns.length > searchColumnsLimit ? <SearchInputInfoIcon searchColumns={searchColumns} /> : null}
     />
   );
