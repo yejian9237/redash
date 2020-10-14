@@ -804,7 +804,7 @@ class Query(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model):
 
         # Query.create will add default TABLE visualization, so use constructor to create bare copy of query
         forked_query = Query(
-            name="Copy of (#{}) {}".format(self.id, self.name), user=user, **kwargs
+            name="副本(#{}){}".format(self.id, self.name), user=user, **kwargs
         )
 
         for v in sorted(self.visualizations, key=lambda v: v.id):
