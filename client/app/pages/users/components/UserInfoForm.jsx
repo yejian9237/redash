@@ -28,7 +28,7 @@ export default function UserInfoForm(props) {
 
       User.save(data)
         .then(user => {
-          successCallback("Saved.");
+          successCallback("保存成功。");
           handleChange(User.convertUserInfo(user));
         })
         .catch(error => {
