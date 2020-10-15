@@ -134,7 +134,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }) {
             defaultChecked={options.swappedAxes}
             checked={options.swappedAxes}
             onChange={handleAxesSwapping}>
-            Horizontal Chart
+            水平图表(Horizontal Chart)
           </Checkbox>
         </Section>
       )}

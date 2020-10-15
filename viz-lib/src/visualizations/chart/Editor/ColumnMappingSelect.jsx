@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Section, Select } from "@/components/visualizations/editor";
 
 const MappingTypes = {
-  x: { label: "X 轴" },
-  y: { label: "Y 轴", multiple: true },
+  x: { label: "X轴" },
+  y: { label: "Y轴", multiple: true },
   series: { label: "分组" },
   yError: { label: "Y轴误差" },
   size: { label: "气泡尺寸(Bubble Size)" },
@@ -14,8 +14,8 @@ const MappingTypes = {
 
 const SwappedMappingTypes = {
   ...MappingTypes,
-  x: { label: "Y Column" },
-  y: { label: "X Columns", multiple: true },
+  x: { label: "Y轴" },
+  y: { label: "X轴", multiple: true },
 };
 
 export default function ColumnMappingSelect({ value, availableColumns, type, onChange, areAxesSwapped }) {
