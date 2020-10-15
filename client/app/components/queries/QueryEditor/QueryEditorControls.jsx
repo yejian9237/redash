@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import Tooltip from "antd/lib/tooltip";
 import Button from "antd/lib/button";
 import Select from "antd/lib/select";
-import { Upload, message } from 'antd';
+import Upload from 'antd/lib/upload';
+import message from 'antd/lib/message';
 import KeyboardShortcuts, { humanReadableShortcut } from "@/services/KeyboardShortcuts";
 import { UploadOutlined } from '@ant-design/icons';
 
