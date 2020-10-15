@@ -50,11 +50,11 @@ class BaseElasticSearch(BaseQueryRunner):
         return {
             "type": "object",
             "properties": {
-                "server": {"type": "string", "title": "Base URL"},
-                "basic_auth_user": {"type": "string", "title": "Basic Auth User"},
+                "server": {"type": "string", "title": "服务器连接"},
+                "basic_auth_user": {"type": "string", "title": "用户"},
                 "basic_auth_password": {
                     "type": "string",
-                    "title": "Basic Auth Password",
+                    "title": "密码",
                 },
             },
             "order": ["server", "basic_auth_user", "basic_auth_password"],
