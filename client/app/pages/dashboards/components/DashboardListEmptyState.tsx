@@ -2,7 +2,8 @@ import * as React from "react";
 import * as PropTypes from "prop-types";
 import BigMessage from "@/components/BigMessage";
 import NoTaggedObjectsFound from "@/components/NoTaggedObjectsFound";
-import EmptyState from "@/components/empty-state/EmptyState";
+import EmptyState, { EmptyStateHelpMessage } from "@/components/empty-state/EmptyState";
+import DynamicComponent from "@/components/DynamicComponent";
 
 export interface DashboardListEmptyStateProps {
   page: string;
@@ -22,13 +23,15 @@ export default function DashboardListEmptyState({ page, searchTerm, selectedTags
       return <BigMessage message="显示我关注的报表。" icon="fa-star" />;
     default:
       return (
-        <EmptyState
-          icon="zmdi zmdi-view-quilt"
-          description="看见大数据"
-          illustration="dashboard"
-          helpLink="https://help.redash.io/category/22-dashboards"
-          showDashboardStep
-        />
+        <DynamicComponent name="DashboardList.EmptyState">
+          <EmptyState
+            icon="zmdi zmdi-view-quilt"
+            description="看见大数据"
+            illustration="dashboard"
+            helpMessage={<EmptyStateHelpMessage helpTriggerType="DASHBOARDS" />}
+            showDashboardStep
+          />
+        </DynamicComponent>
       );
   }
 }

@@ -154,8 +154,8 @@ export default function QueryVisualizationTabs({
             />
           ) : (
             <EmptyState
-              title="查询没有记录"
-              message="执行或刷新查询重试。"
+              title="查询结果没有记录"
+              message="请执行或刷新查询重试。"
               refreshButton={refreshButton}
             />
           )}

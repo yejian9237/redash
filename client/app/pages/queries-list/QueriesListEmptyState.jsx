@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Link from "@/components/Link";
 import BigMessage from "@/components/BigMessage";
 import NoTaggedObjectsFound from "@/components/NoTaggedObjectsFound";
-import EmptyState from "@/components/empty-state/EmptyState";
+import EmptyState, { EmptyStateHelpMessage } from "@/components/empty-state/EmptyState";
+import DynamicComponent from "@/components/DynamicComponent";
 
 export default function QueriesListEmptyState({ page, searchTerm, selectedTags }) {
   if (searchTerm !== "") {
@@ -29,12 +30,14 @@ export default function QueriesListEmptyState({ page, searchTerm, selectedTags }
       );
     default:
       return (
-        <EmptyState
-          icon="fa fa-code"
-          illustration="query"
-          description="从数据源提取数据。"
-          helpLink="https://help.redash.io/category/21-querying"
-        />
+        <DynamicComponent name="QueriesList.EmptyState">
+          <EmptyState
+            icon="fa fa-code"
+            illustration="query"
+            description="从数据源获取数据。"
+            helpMessage={<EmptyStateHelpMessage helpTriggerType="QUERIES" />}
+          />
+        </DynamicComponent>
       );
   }
 }

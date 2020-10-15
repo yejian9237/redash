@@ -9,7 +9,7 @@ export default function YAxisSettings({ options, onOptionsChange }) {
 
   return (
     <React.Fragment>
-      <Section.Title>左侧Y轴</Section.Title>
+      <Section.Title>{!options.swappedAxes ? "左侧Y轴" : "X轴"}</Section.Title>
 
       <Section>
         <AxisSettings
@@ -20,7 +20,7 @@ export default function YAxisSettings({ options, onOptionsChange }) {
         />
       </Section>
 
-      {options.globalSeriesType !== "heatmap" && (
+      {options.globalSeriesType !== "heatmap" && !options.swappedAxes && (
         <React.Fragment>
           <Section.Title>右侧Y轴</Section.Title>
 

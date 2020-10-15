@@ -30,6 +30,7 @@ function NumberFormatSpecs() {
   const { HelpTriggerComponent } = visualizationsSettings;
   return (
     <HelpTriggerComponent
+      type="NUMBER_FORMAT_SPECS"
       title="格式化数字"
       href="https://redash.io/help/user-guide/visualizations/formatting-numbers"
       className="visualization-editor-context-help">

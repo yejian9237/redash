@@ -28,13 +28,13 @@ export default createTabbedEditor([
   },
   {
     key: "XAxis",
-    title: "X 轴",
+    title: ({ swappedAxes }) => (!swappedAxes ? "X轴" : "Y轴"),
     component: XAxisSettings,
     isAvailable: options => !isCustomChart(options) && !isPieChart(options),
   },
   {
     key: "YAxis",
-    title: "Y 轴",
+    title: ({ swappedAxes }) => (!swappedAxes ? "Y轴" : "X轴"),
     component: YAxisSettings,
     isAvailable: options => !isCustomChart(options) && !isPieChart(options),
   },

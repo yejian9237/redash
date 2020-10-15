@@ -39,23 +39,26 @@ function getTableColumns(options, updateSeriesOption, debouncedUpdateSeriesOptio
   ];
 
   if (!includes(["pie", "heatmap"], options.globalSeriesType)) {
-    result.push({
-      title: "Y 轴",
-      dataIndex: "yAxis",
-      render: (unused, item) => (
-        <Radio.Group
-          className="series-settings-y-axis"
-          value={item.yAxis === 1 ? 1 : 0}
-          onChange={event => updateSeriesOption(item.key, "yAxis", event.target.value)}>
-          <Radio value={0} data-test={`Chart.Series.${item.key}.UseLeftAxis`}>
-            左侧
-          </Radio>
-          <Radio value={1} data-test={`Chart.Series.${item.key}.UseRightAxis`}>
-            右侧
-          </Radio>
-        </Radio.Group>
-      ),
-    });
+    if (!options.swappedAxes) {
+      result.push({
+        title: "Y轴",
+        dataIndex: "yAxis",
+        render: (unused, item) => (
+          <Radio.Group
+            className="series-settings-y-axis"
+            value={item.yAxis === 1 ? 1 : 0}
+            onChange={event => updateSeriesOption(item.key, "yAxis", event.target.value)}>
+            <Radio value={0} data-test={`Chart.Series.${item.key}.UseLeftAxis`}>
+              左侧
+            </Radio>
+            <Radio value={1} data-test={`Chart.Series.${item.key}.UseRightAxis`}>
+              右侧
+            </Radio>
+          </Radio.Group>
+        ),
+      });
+    }
+
     result.push({
       title: "类型",
       dataIndex: "type",
@@ -64,6 +67,7 @@ function getTableColumns(options, updateSeriesOption, debouncedUpdateSeriesOptio
           data-test={`Chart.Series.${item.key}.Type`}
           dropdownMatchSelectWidth={false}
           value={item.type}
+          hiddenChartTypes={["pie", "heatmap", "bubble", "box"]}
           onChange={value => updateSeriesOption(item.key, "type", value)}
         />
       ),
