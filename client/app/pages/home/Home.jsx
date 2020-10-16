@@ -165,7 +165,7 @@ export default function Home() {
             header="欢迎使用Redash 👋"
             description="连接任何数据源，轻松看见和分享数据。"
             illustration="dashboard"
-            helpMessage={<EmptyStateHelpMessage helpLink="https://redash.io/help/user-guide/getting-started" />}
+            helpMessage={<EmptyStateHelpMessage helpTriggerType="GETTING_STARTED" />}
             showDashboardStep
             showInviteStep
             onboardingMode

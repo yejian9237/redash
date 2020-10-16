@@ -43,7 +43,7 @@ export const TYPES = mapValues(
       "目录：设置查询权限",
     ],
     NUMBER_FORMAT_SPECS: ["/user-guide/visualizations/formatting-numbers", "格式化数字"],
-    GETTING_STARTED: ["/help/user-guide/getting-started", "目录：开始"],
+    GETTING_STARTED: ["/user-guide/getting-started", "目录：开始"],
     DASHBOARDS: ["/user-guide/dashboards", "目录：报表"],
     QUERIES: ["/help/user-guide/querying", "目录：查询"],
     ALERTS: ["/user-guide/alerts", "目录：提醒"],
