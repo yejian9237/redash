@@ -15,6 +15,7 @@ import { prepareCustomChartData, createCustomChartRenderer } from "./customChart
 Plotly.register([bar, pie, histogram, box, heatmap]);
 Plotly.setPlotConfig({
   modeBarButtonsToRemove: ["sendDataToCloud"],
+  locale: 'zh-CN',
 });
 
 export {
