@@ -37,10 +37,13 @@
 
     <form role="form" method="post" name="create_account">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-      <h4 class="m-t-25">系统管理员</h4>
+      <h4 class="m-t-25">系统管理员：</h4>
       {{ render_field(form.name) }}
       {{ render_field(form.email) }}
       {{ render_field(form.password) }}
+
+      <h4 class="m-t-25">单位信息：</h4>
+      {{ render_field(form.org_name, help_block="单位名称会出现在电子邮件里和界面上。") }}
 
       <div class="checkbox">
         <label>
@@ -55,10 +58,6 @@
           订阅动态 (版本更新，每月一期)。
         </label>
       </div>
-
-      <h4 class="m-t-25">单位名称</h4>
-
-      {{ render_field(form.org_name, help_block="单位名称会出现在电子邮件里和界面上。") }}
 
       <button type="submit" class="btn btn-primary btn-block m-t-25">设置</button>
     </form>
