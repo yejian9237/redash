@@ -42,9 +42,9 @@ Step.defaultProps = {
 export function EmptyStateHelpMessage({ helpTriggerType }) {
   return (
     <p>
-      Need more support?{" "}
+      若需要更多支持，{" "}
       <HelpTrigger className="f-14" type={helpTriggerType} showTooltip={false}>
-        See our Help
+        请查看帮助
       </HelpTrigger>
     </p>
   );
