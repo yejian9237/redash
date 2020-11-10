@@ -91,7 +91,7 @@ export function Manager({ info }) {
     : [];
 
   return (
-    <Card title="Manager" size="small">
+    <Card title="管理" size="small">
       {!info && <div className="text-muted text-center">无数据</div>}
       {info && <List size="small" itemLayout="vertical" dataSource={items} renderItem={item => item} />}
     </Card>
