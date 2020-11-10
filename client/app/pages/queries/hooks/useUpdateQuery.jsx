@@ -4,6 +4,7 @@ import Modal from "antd/lib/modal";
 import { Query } from "@/services/query";
 import notification from "@/services/notification";
 import useImmutableCallback from "@/lib/hooks/useImmutableCallback";
+import { policy } from "@/services/policy";
 
 class SaveQueryError extends Error {
   constructor(message, detailedMessage = null) {
@@ -95,10 +96,11 @@ export default function useUpdateQuery(query, onChange) {
           "options",
           "latest_query_data_id",
           "is_draft",
+          "tags",
         ]);
       }
 
-      return doSaveQuery(data, { canOverwrite: query.can_edit })
+      return doSaveQuery(data, { canOverwrite: policy.canEdit(query) })
         .then(updatedQuery => {
           if (!isNil(successMessage)) {
             notification.success(successMessage);

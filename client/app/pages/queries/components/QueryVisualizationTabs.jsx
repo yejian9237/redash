@@ -92,6 +92,7 @@ export default function QueryVisualizationTabs({
   onAddVisualization,
   onDeleteVisualization,
   refreshButton,
+  canRefresh,
   ...props
 }) {
   const visualizations = useMemo(
@@ -155,7 +156,11 @@ export default function QueryVisualizationTabs({
           ) : (
             <EmptyState
               title="查询结果没有记录"
-              message="请执行或刷新查询重试。"
+              message={
+                canRefresh
+                  ? "请执行或刷新查询。"
+                  : "没有权限执行或刷新查询。"
+              }
               refreshButton={refreshButton}
             />
           )}
@@ -175,6 +180,7 @@ QueryVisualizationTabs.propTypes = {
   onAddVisualization: PropTypes.func,
   onDeleteVisualization: PropTypes.func,
   refreshButton: PropTypes.node,
+  canRefresh: PropTypes.bool,
 };
 
 QueryVisualizationTabs.defaultProps = {
@@ -187,4 +193,5 @@ QueryVisualizationTabs.defaultProps = {
   onAddVisualization: () => {},
   onDeleteVisualization: () => {},
   refreshButton: null,
+  canRefresh: true,
 };

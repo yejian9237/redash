@@ -146,7 +146,7 @@ function DashboardMoreOptionsButton({ dashboardOptions }) {
               <a onClick={managePermissions}>权限管理</a>
             </Menu.Item>
           )}
-          {!dashboard.is_draft && (
+          {!clientConfig.disablePublish && !dashboard.is_draft && (
             <Menu.Item>
               <a onClick={togglePublished}>草稿</a>
             </Menu.Item>

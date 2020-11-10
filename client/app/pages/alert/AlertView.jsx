@@ -19,6 +19,7 @@ import Query from "./components/Query";
 import AlertDestinations from "./components/AlertDestinations";
 import HorizontalFormItem from "./components/HorizontalFormItem";
 import { STATE_CLASS } from "../alerts/AlertsList";
+import DynamicComponent from "@/components/DynamicComponent";
 
 function AlertState({ state, lastTriggered }) {
   return (
@@ -66,7 +67,8 @@ export default class AlertView extends React.Component {
     return (
       <>
         <Title name={name} alert={alert}>
-          <Tooltip title={canEdit ? "" : "没有权限"}>
+          <DynamicComponent name="AlertView.HeaderExtra" alert={alert} />
+          <Tooltip title={canEdit ? "" : "没有权限编辑提醒"}>
             <Button type="default" onClick={canEdit ? onEdit : null} className={cx({ disabled: !canEdit })}>
               <i className="fa fa-edit m-r-5" />
               编辑

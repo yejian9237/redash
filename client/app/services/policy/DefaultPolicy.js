@@ -1,4 +1,4 @@
-import { isArray } from "lodash";
+import { get, isArray } from "lodash";
 import { currentUser, clientConfig } from "@/services/auth";
 
 /* eslint-disable class-methods-use-this */
@@ -60,5 +60,13 @@ export default class DefaultPolicy {
 
   isAdmin() {
     return currentUser.isAdmin;
+  }
+  
+  canEdit(object) {
+    return get(object, "can_edit", false);
+  }
+
+  canRun() {
+    return true;
   }
 }

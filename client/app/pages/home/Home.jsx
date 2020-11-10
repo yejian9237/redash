@@ -1,10 +1,8 @@
-import { includes, isEmpty } from "lodash";
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { includes } from "lodash";
+import React, { useEffect } from "react";
 
 import Alert from "antd/lib/alert";
 import Link from "@/components/Link";
-import LoadingOutlinedIcon from "@ant-design/icons/LoadingOutlined";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import EmptyState, { EmptyStateHelpMessage } from "@/components/empty-state/EmptyState";
 import DynamicComponent from "@/components/DynamicComponent";
@@ -14,9 +12,9 @@ import { axios } from "@/services/axios";
 import recordEvent from "@/services/recordEvent";
 import { messages } from "@/services/auth";
 import notification from "@/services/notification";
-import { Dashboard } from "@/services/dashboard";
-import { Query } from "@/services/query";
 import routes from "@/services/routes";
+
+import { DashboardAndQueryFavoritesList } from "./components/FavoritesList";
 
 import "./Home.less";
 
@@ -62,91 +60,6 @@ function EmailNotVerifiedAlert() {
         </>
       }
     />
-  );
-}
-
-function FavoriteList({ title, resource, itemUrl, emptyState }) {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    resource
-      .favorites()
-      .then(({ results }) => setItems(results))
-      .finally(() => setLoading(false));
-  }, [resource]);
-
-  return (
-    <>
-      <div className="d-flex align-items-center m-b-20">
-        <p className="flex-fill f-500 c-black m-0">{title}</p>
-        {loading && <LoadingOutlinedIcon />}
-      </div>
-      {!isEmpty(items) && (
-        <div className="list-group">
-          {items.map(item => (
-            <Link key={itemUrl(item)} className="list-group-item" href={itemUrl(item)}>
-              <span className="btn-favourite m-r-5">
-                <i className="fa fa-star" aria-hidden="true" />
-              </span>
-              {item.name}
-              {item.is_draft && <span className="label label-default m-l-5">草稿</span>}
-            </Link>
-          ))}
-        </div>
-      )}
-      {isEmpty(items) && !loading && emptyState}
-    </>
-  );
-}
-
-FavoriteList.propTypes = {
-  title: PropTypes.string.isRequired,
-  resource: PropTypes.func.isRequired, // eslint-disable-line react/forbid-prop-types
-  itemUrl: PropTypes.func.isRequired,
-  emptyState: PropTypes.node,
-};
-FavoriteList.defaultProps = { emptyState: null };
-
-function DashboardAndQueryFavoritesList() {
-  return (
-    <div className="tile">
-      <div className="t-body tb-padding">
-        <div className="row home-favorites-list">
-          <div className="col-sm-6 m-t-20">
-            <FavoriteList
-              title="我关注的报表"
-              resource={Dashboard}
-              itemUrl={dashboard => dashboard.url}
-              emptyState={
-                <p>
-                  <span className="btn-favourite m-r-5">
-                    <i className="fa fa-star" aria-hidden="true" />
-                  </span>
-                  <Link href="dashboards">关注的报表</Link>
-                </p>
-              }
-            />
-          </div>
-          <div className="col-sm-6 m-t-20">
-            <FavoriteList
-              title="我关注的查询"
-              resource={Query}
-              itemUrl={query => `queries/${query.id}`}
-              emptyState={
-                <p>
-                  <span className="btn-favourite m-r-5">
-                    <i className="fa fa-star" aria-hidden="true" />
-                  </span>
-                  <Link href="queries">关注的查询</Link>
-                </p>
-              }
-            />
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
