@@ -59,7 +59,7 @@ export function DashboardAndQueryFavoritesList() {
         <div className="row home-favorites-list">
           <div className="col-sm-6 m-t-20">
             <FavoriteList
-              title="Favorite Dashboards"
+              title="关注的报表"
               resource={Dashboard}
               itemUrl={dashboard => dashboard.url}
               emptyState={
@@ -67,14 +67,14 @@ export function DashboardAndQueryFavoritesList() {
                   <span className="btn-favourite m-r-5">
                     <i className="fa fa-star" aria-hidden="true" />
                   </span>
-                  Favorite <Link href="dashboards">Dashboards</Link> will appear here
+                  <Link href="dashboards">您关注的报表将显示在这里</Link>
                 </p>
               }
             />
           </div>
           <div className="col-sm-6 m-t-20">
             <FavoriteList
-              title="Favorite Queries"
+              title="关注的查询"
               resource={Query}
               itemUrl={query => `queries/${query.id}`}
               emptyState={
@@ -82,7 +82,7 @@ export function DashboardAndQueryFavoritesList() {
                   <span className="btn-favourite m-r-5">
                     <i className="fa fa-star" aria-hidden="true" />
                   </span>
-                  Favorite <Link href="queries">Queries</Link> will appear here
+                  <Link href="queries">您关注的查询将显示在这里</Link>
                 </p>
               }
             />
