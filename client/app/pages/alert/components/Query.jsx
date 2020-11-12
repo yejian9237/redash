@@ -25,7 +25,7 @@ export default function QueryFormItem({ query, queryResult, onChange, editMode }
       </small>
     ) : (
       <small>
-        <WarningFilledIcon className="warning-icon-danger" /> This query has no <i>refresh schedule</i>.{" "}
+        <WarningFilledIcon className="warning-icon-danger" /> 这个查询没有设置 <i>自动刷新</i>.{" "}
         <Tooltip title="要设置提醒，强烈建议使用自动刷新。对于不自动刷新的查询，仅在用户执行时发送一次提醒。">
           <a>
           强烈推荐 <QuestionCircleTwoToneIcon />
