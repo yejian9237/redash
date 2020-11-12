@@ -64,11 +64,11 @@ error_messages = {
 def run_query(query, parameters, data_source, query_id, should_apply_auto_limit, max_age=0):
     if data_source.paused:
         if data_source.pause_reason:
-            message = "{} is paused ({}). Please try later.".format(
+            message = "{}由于({})已暂停，请稍后再试。".format(
                 data_source.name, data_source.pause_reason
             )
         else:
-            message = "{} is paused. Please try later.".format(data_source.name)
+            message = "{}已暂停，请稍后再试。".format(data_source.name)
 
         return error_response(message)
 
