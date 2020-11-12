@@ -7,7 +7,7 @@ export default function VersionInfo() {
   return (
     <React.Fragment>
       <div>
-        Version: {clientConfig.version}
+        版本: {clientConfig.version}
         {frontendVersion !== clientConfig.version && ` (${frontendVersion.substring(0, 8)})`}
       </div>
       {clientConfig.newVersionAvailable && currentUser.hasPermission("super_admin") && (
