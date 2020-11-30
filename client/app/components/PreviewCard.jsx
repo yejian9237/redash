@@ -91,3 +91,30 @@ DataSourcePreviewCard.defaultProps = {
   withLink: false,
   children: null,
 };
+
+// DashboardPreviewCard
+
+
+export function DashboardPreviewCard({ dashboard, withLink, children, ...props }) {
+  const imageUrl = ``;
+  const title = withLink ? <Link href={"dashboards/" + dashboard.id}>{dashboard.name}</Link> : dashboard.name;
+  return (
+    <PreviewCard {...props} imageUrl={imageUrl} title={title}>
+      {children}
+    </PreviewCard>
+  );
+}
+
+DashboardPreviewCard.propTypes = {
+  dashboard: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  withLink: PropTypes.bool,
+  children: PropTypes.node,
+};
+
+DashboardPreviewCard.defaultProps = {
+  withLink: false,
+  children: null,
+};

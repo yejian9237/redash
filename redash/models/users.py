@@ -289,6 +289,10 @@ class Group(db.Model, BelongsToOrgMixin):
     type = Column(db.String(255), default=REGULAR_GROUP)
     name = Column(db.String(100))
     permissions = Column(postgresql.ARRAY(db.String(255)), default=DEFAULT_PERMISSIONS)
+    dashboards = db.relationship(
+        "DashboardGroup", back_populates="group", cascade="all"
+    )
+
     created_at = Column(db.DateTime(True), default=db.func.now())
 
     __tablename__ = "groups"

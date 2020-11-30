@@ -37,6 +37,7 @@ def has_access_to_groups(obj, user, need_view_only):
     if "admin" in user.permissions:
         return True
 
+    # 对象的小组与用户的小组取交集
     matching_groups = set(groups.keys()).intersection(user.group_ids)
 
     if not matching_groups:
@@ -44,6 +45,7 @@ def has_access_to_groups(obj, user, need_view_only):
 
     required_level = 1 if need_view_only else 2
 
+    # 小组的权限等级
     group_level = 1 if all(flatten([groups[group] for group in matching_groups])) else 2
 
     return required_level <= group_level

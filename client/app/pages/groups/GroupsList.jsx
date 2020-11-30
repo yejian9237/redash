@@ -45,6 +45,7 @@ class GroupsList extends React.Component {
         <Button.Group>
           <Link.Button href={`groups/${group.id}`}>成员</Link.Button>
           {currentUser.isAdmin && <Link.Button href={`groups/${group.id}/data_sources`}>数据源</Link.Button>}
+          {currentUser.isAdmin && <Link.Button href={`groups/${group.id}/dashboards`}>看板</Link.Button>}
         </Button.Group>
       ),
       {

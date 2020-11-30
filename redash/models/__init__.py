@@ -280,6 +280,8 @@ class DataSource(BelongsToOrgMixin, db.Model):
         return dict([(group.group_id, group.view_only) for group in groups])
 
 
+# 数据源与组的绑定
+
 @generic_repr("id", "data_source_id", "group_id", "view_only")
 class DataSourceGroup(db.Model):
     # XXX drop id, use datasource/group as PK
@@ -293,6 +295,7 @@ class DataSourceGroup(db.Model):
     __tablename__ = "data_source_groups"
 
 
+# TODO ReportFormGroup 报表与小组绑定
 DESERIALIZED_DATA_ATTR = "_deserialized_data"
 
 
@@ -1099,6 +1102,9 @@ class Dashboard(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model
     tags = Column(
         "tags", MutableList.as_mutable(postgresql.ARRAY(db.Unicode)), nullable=True
     )
+    dashboard_groups = db.relationship(
+        "DashboardGroup", back_populates="dashboard", cascade="all"
+    )
 
     __tablename__ = "dashboards"
     __mapper_args__ = {"version_id_col": version}
@@ -1124,10 +1130,11 @@ class Dashboard(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model
             .outerjoin(
                 DataSourceGroup, Query.data_source_id == DataSourceGroup.data_source_id
             )
+            .outerjoin(DashboardGroup)
             .filter(
                 Dashboard.is_archived == False,
                 (
-                    DataSourceGroup.group_id.in_(group_ids)
+                    (DataSourceGroup.group_id.in_(group_ids) & (DashboardGroup.group_id.in_(group_ids)))
                     | (Dashboard.user_id == user_id)
                 ),
                 Dashboard.org == org,
@@ -1181,6 +1188,26 @@ class Dashboard(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model
     def get_by_slug_and_org(cls, slug, org):
         return cls.query.filter(cls.slug == slug, cls.org == org).one()
 
+    def add_group(self, group, view_only=False):
+        dsg = DashboardGroup(group=group, dashboard=self, view_only=view_only)
+        db.session.add(dsg)
+        return dsg
+
+    def remove_group(self, group):
+        DashboardGroup.query.filter(
+            DashboardGroup.group == group, DashboardGroup.dashboard == self
+        ).delete()
+        db.session.commit()
+
+    def update_group_permission(self, group, view_only):
+        dg = DashboardGroup.query.filter(
+            DashboardGroup.group == group, DashboardGroup.dashboard == self
+        ).one()
+        dg.view_only = view_only
+        db.session.add(dg)
+        return dg
+
+
     @hybrid_property
     def lowercase_name(self):
         "Optional property useful for sorting purposes."
@@ -1190,6 +1217,21 @@ class Dashboard(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model
     def lowercase_name(cls):
         "The SQLAlchemy expression for the property above."
         return func.lower(cls.name)
+
+
+# TODO DashboardGroup 看板与小组绑定
+
+@generic_repr("id", "dashboard_id", "group_id", "view_only")
+class DashboardGroup(db.Model):
+    # XXX drop id, use datasource/group as PK
+    id = primary_key("DashboardGroup")
+    dashboard_id = Column(key_type("Dashboard"), db.ForeignKey("dashboards.id"))
+    dashboard = db.relationship(Dashboard, back_populates="dashboard_groups")
+    group_id = Column(key_type("Group"), db.ForeignKey("groups.id"))
+    group = db.relationship(Group, back_populates="dashboards")
+    view_only = Column(db.Boolean, default=True)
+
+    __tablename__ = "dashboard_groups"
 
 
 @generic_repr("id", "name", "type", "query_id")

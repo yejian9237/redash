@@ -16,7 +16,7 @@ import { StateStorage } from "@/components/items-list/classes/StateStorage";
 import LoadingState from "@/components/items-list/components/LoadingState";
 import ItemsTable, { Columns } from "@/components/items-list/components/ItemsTable";
 import SelectItemsDialog from "@/components/SelectItemsDialog";
-import { DataSourcePreviewCard } from "@/components/PreviewCard";
+import { DashboardPreviewCard } from "@/components/PreviewCard";
 
 import GroupName from "@/components/groups/GroupName";
 import ListItemAddon from "@/components/groups/ListItemAddon";
@@ -27,10 +27,10 @@ import wrapSettingsTab from "@/components/SettingsWrapper";
 import notification from "@/services/notification";
 import { currentUser } from "@/services/auth";
 import Group from "@/services/group";
-import DataSource from "@/services/data-source";
+import Dashboard from "@/services/dashboard";
 import routes from "@/services/routes";
 
-class GroupDataSources extends React.Component {
+class GroupDashboards extends React.Component {
   static propTypes = {
     controller: ControllerType.isRequired,
   };
@@ -61,17 +61,17 @@ class GroupDataSources extends React.Component {
   ];
 
   listColumns = [
-    Columns.custom((text, datasource) => <DataSourcePreviewCard dataSource={datasource} withLink />, {
+    Columns.custom((text, dashboard) => <DashboardPreviewCard dashboard={dashboard} withLink />, {
       title: "名称",
       field: "name",
       width: null,
     }),
     Columns.custom(
-      (text, datasource) => {
+      (text, dashboard) => {
         const menu = (
           <Menu
-            selectedKeys={[datasource.view_only ? "viewonly" : "full"]}
-            onClick={item => this.setDataSourcePermissions(datasource, item.key)}>
+            selectedKeys={[dashboard.view_only ? "viewonly" : "full"]}
+            onClick={item => this.setDashboardPermissions(dashboard, item.key)}>
             <Menu.Item key="full">全部权限</Menu.Item>
             <Menu.Item key="viewonly">只读权限</Menu.Item>
           </Menu>
@@ -80,7 +80,7 @@ class GroupDataSources extends React.Component {
         return (
           <Dropdown trigger={["click"]} overlay={menu}>
             <Button className="w-100">
-              {datasource.view_only ? "只读权限" : "全部权限"}
+              {dashboard.view_only ? "只读权限" : "全部权限"}
               <DownOutlinedIcon />
             </Button>
           </Dropdown>
@@ -93,8 +93,8 @@ class GroupDataSources extends React.Component {
       }
     ),
     Columns.custom(
-      (text, datasource) => (
-        <Button className="w-100" type="danger" onClick={() => this.removeGroupDataSource(datasource)}>
+      (text, dashboard) => (
+        <Button className="w-100" type="danger" onClick={() => this.removeGroupDashboard(dashboard)}>
           Remove
         </Button>
       ),
@@ -116,48 +116,48 @@ class GroupDataSources extends React.Component {
       });
   }
 
-  removeGroupDataSource = datasource => {
-    Group.removeDataSource({ id: this.groupId, dataSourceId: datasource.id })
+  removeGroupDashboard = dashboard => {
+    Group.removeDashboard({ id: this.groupId, dashboardId: dashboard.id })
       .then(() => {
         this.props.controller.updatePagination({ page: 1 });
         this.props.controller.update();
       })
       .catch(() => {
-        notification.error("移除数据源失败。");
+        notification.error("移除看板失败。");
       });
   };
 
-  setDataSourcePermissions = (datasource, permission) => {
+  setDashboardPermissions = (dashboard, permission) => {
     const viewOnly = permission !== "full";
 
-    Group.updateDataSource({ id: this.groupId, dataSourceId: datasource.id }, { view_only: viewOnly })
+    Group.updateDashboard({ id: this.groupId, dashboardId: dashboard.id }, { view_only: viewOnly })
       .then(() => {
-        datasource.view_only = viewOnly;
+        dashboard.view_only = viewOnly;
         this.forceUpdate();
       })
       .catch(() => {
-        notification.error("改变数据源权限失败。");
+        notification.error("改变看板权限失败。");
       });
   };
 
-  addDataSources = () => {
-    const allDataSources = DataSource.query();
-    const alreadyAddedDataSources = map(this.props.controller.allItems, ds => ds.id);
+  addDashboards = () => {
+    const allDashboards = Dashboard.query();
+    const alreadyAddedDashboards = map(this.props.controller.allItems, ds => ds.id);
     SelectItemsDialog.showModal({
-      dialogTitle: "添加数据源",
-      inputPlaceholder: "搜索数据源...",
-      selectedItemsTitle: "新建数据源",
+      dialogTitle: "添加看板",
+      inputPlaceholder: "搜索看板...",
+      selectedItemsTitle: "新建看板",
       searchItems: searchTerm => {
         searchTerm = toLower(searchTerm);
-        return allDataSources.then(items => filter(items, ds => includes(toLower(ds.name), searchTerm)));
+        return allDashboards.then(items => filter(items, ds => includes(toLower(ds.name), searchTerm)));
       },
       renderItem: (item, { isSelected }) => {
-        const alreadyInGroup = includes(alreadyAddedDataSources, item.id);
+        const alreadyInGroup = includes(alreadyAddedDashboards, item.id);
         return {
           content: (
-            <DataSourcePreviewCard dataSource={item}>
+            <DashboardPreviewCard dashboard={item}>
               <ListItemAddon isSelected={isSelected} alreadyInGroup={alreadyInGroup} />
-            </DataSourcePreviewCard>
+            </DashboardPreviewCard>
           ),
           isDisabled: alreadyInGroup,
           className: isSelected || alreadyInGroup ? "selected" : "",
@@ -165,13 +165,13 @@ class GroupDataSources extends React.Component {
       },
       renderStagedItem: (item, { isSelected }) => ({
         content: (
-          <DataSourcePreviewCard dataSource={item}>
+          <DashboardPreviewCard dashboard={item}>
             <ListItemAddon isSelected={isSelected} isStaged />
-          </DataSourcePreviewCard>
+          </DashboardPreviewCard>
         ),
       }),
     }).onClose(items => {
-      const promises = map(items, ds => Group.addDataSource({ id: this.groupId }, { data_source_id: ds.id }));
+      const promises = map(items, ds => Group.addDashboard({ id: this.groupId }, { dashboard_id: ds.id }));
       return Promise.all(promises).then(() => this.props.controller.update());
     });
   };
@@ -187,8 +187,8 @@ class GroupDataSources extends React.Component {
               controller={controller}
               group={this.group}
               items={this.sidebarMenu}
-              canAddDataSources={currentUser.isAdmin}
-              onAddDataSourcesClick={this.addDataSources}
+              canAddDashboards={currentUser.isAdmin}
+              onAddDashboardsClick={this.addDashboards}
               onGroupDeleted={() => navigateTo("groups")}
             />
           </Layout.Sidebar>
@@ -196,11 +196,11 @@ class GroupDataSources extends React.Component {
             {!controller.isLoaded && <LoadingState className="" />}
             {controller.isLoaded && controller.isEmpty && (
               <div className="text-center">
-                <p>该角色没有添加数据源。</p>
+                <p>该角色没有添加看板。</p>
                 {currentUser.isAdmin && (
-                  <Button type="primary" onClick={this.addDataSources}>
+                  <Button type="primary" onClick={this.addDashboards}>
                     <i className="fa fa-plus m-r-5" />
-                    添加数据源
+                    添加看板
                   </Button>
                 )}
               </div>
@@ -233,11 +233,11 @@ class GroupDataSources extends React.Component {
   }
 }
 
-const GroupDataSourcesPage = wrapSettingsTab(
-  "Groups.DataSources",
+const GroupDashboardPage = wrapSettingsTab(
+  "Groups.Dashboards",
   null,
   itemsList(
-    GroupDataSources,
+    GroupDashboards,
     () =>
       new ResourceItemsSource({
         isPlainList: true,
@@ -245,7 +245,7 @@ const GroupDataSourcesPage = wrapSettingsTab(
           return { id: groupId };
         },
         getResource() {
-          return Group.dataSources.bind(Group);
+          return Group.dashboards.bind(Group);
         },
       }),
     () => new StateStorage({ orderByField: "name" })
@@ -253,10 +253,10 @@ const GroupDataSourcesPage = wrapSettingsTab(
 );
 
 routes.register(
-  "Groups.DataSources",
+  "Groups.Dashboards",
   routeWithUserSession({
-    path: "/groups/:groupId/data_sources",
-    title: "角色数据源",
-    render: pageProps => <GroupDataSourcesPage {...pageProps} currentPage="datasources" />,
+    path: "/groups/:groupId/dashboards",
+    title: "角色看板",
+    render: pageProps => <GroupDashboardPage {...pageProps} currentPage="dashboards" />,
   })
 );
